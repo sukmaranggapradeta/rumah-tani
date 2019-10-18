@@ -1,0 +1,45 @@
+<template>
+    <div class="dashboard">
+        <div class="row">
+            <div class="col l2">
+                <div class="collection">
+                    <a @click="showProducerList" class="collection-item">Producers</a>
+                    <a @click="showCostumerList" class="collection-item">Costumers</a>
+                    <a href="#!" class="collection-item">Transactions</a>
+                </div>
+            </div>
+            <div class="col l10">
+                <router-view> </router-view>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+// @ is an alias to /src
+
+export default {
+  name: "home",
+  methods: {
+      showProducerList() {
+          this.$router.push('/dashboard/producer')
+      },
+      showCostumerList() {
+          this.$router.push('/dashboard/costumer')
+      }
+  }
+};
+</script>
+
+<style scoped>
+.box-home {
+  margin: 3vw auto;
+}
+img {
+  width: 100%;
+}
+p {
+  font-family: "Dosis", sans-serif;
+  font-size: 18px;
+}
+</style>
