@@ -30,6 +30,26 @@
               />
               <label for="register_email">Email</label>
             </div>
+
+            <div class="row">
+              <div class="col s6 m6 l6">
+                <p>
+                  <label>
+                    <input v-model="register_role" value="Customer" name="group1" type="radio" />
+                    <span>Customer</span>
+                  </label>
+                </p>
+              </div>
+              <div class="col s6 m6 l6">
+                <p>
+                  <label>
+                    <input v-model="register_role" value="Farmer" name="group1" type="radio" />
+                    <span>Farmer</span>
+                  </label>
+                </p>
+              </div>
+            </div>
+
             <div class="input-field">
               <i class="material-icons prefix">vpn_key</i>
               <input
@@ -78,18 +98,27 @@ export default {
     return {
       register_name: "",
       register_email: "",
+      register_role: "",
       register_password: "",
       confirmpassword: ""
     };
   },
   methods: {
     register_button() {
+      console.log("register button di click");
+      console.log("namenya ", this.register_name);
+      console.log("emailnya ", this.register_email);
+      console.log("rolenya ", this.register_role);
+      console.log("passnya ", this.register_password);
+      console.log("pass2nya ", this.confirmpassword);
+
       if (this.register_password === this.confirmpassword) {
         myServer
           .post("/register", {
             name: this.register_name,
             email: this.register_email,
-            password: this.register_password
+            password: this.register_password,
+            role: this.register_role
           })
           .then(newUser => {
             Swal.fire({
@@ -100,6 +129,7 @@ export default {
               timer: 1500
             });
             this.$router.push("/login");
+            console.log("newUser adalah", newUser);
           })
           .catch(err => {
             Swal.fire({

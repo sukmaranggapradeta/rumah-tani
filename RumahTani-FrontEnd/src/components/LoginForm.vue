@@ -63,7 +63,7 @@ export default {
           password: this.login_password
         })
         .then(user => {
-          localStorage.setItem("token", user.data.token);
+          // localStorage.setItem("token", user.data.token);
           localStorage.setItem("id", user.data.id);
           localStorage.setItem("name", user.data.name);
           localStorage.setItem("email", user.data.email);
