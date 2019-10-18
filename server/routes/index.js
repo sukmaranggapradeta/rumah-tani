@@ -14,6 +14,8 @@ route.post('/login', ControllerUser.login)
 
 route.get('/user/:role', ControllerUser.findAll)
 route.get('/user/:userId', ControllerUser.findOne)
+route.put('/user/:userId', ControllerUser.update)
+route.delete('/user/:userId', ControllerUser.delete)
 
 route.post('/product/:userId', ControllerProduct.create)
 route.get('/product/all/:userId',  ControllerProduct.findAll) // userId : 'null' to get All data for consumer
