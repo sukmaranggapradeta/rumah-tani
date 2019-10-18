@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col l2">
                 <div class="collection">
-                    <a @click="showProducerList" class="collection-item">Producers</a>
+                    <a @click="showFarmerList" class="collection-item">Farmer</a>
                     <a @click="showCostumerList" class="collection-item">Costumers</a>
                     <a href="#!" class="collection-item">Transactions</a>
                 </div>
@@ -16,17 +16,17 @@
 </template>
 
 <script>
-// @ is an alias to /src
+ // @ is an alias to /src
 
 export default {
   name: "home",
   methods: {
-      showProducerList() {
-          this.$router.push('/dashboard/producer')
-      },
       showCostumerList() {
-          this.$router.push('/dashboard/costumer')
-      }
+          this.$router.push('/dashboard/customers')
+      },
+      showFarmerList() {
+          this.$router.push('/dashboard/farmer')
+      },
   }
 };
 </script>

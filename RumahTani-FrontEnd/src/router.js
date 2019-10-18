@@ -29,15 +29,15 @@ export default new Router({
       component: () => import(/* webpackChunkName: "dashboard" */ "./views/Dashboard.vue"),
       children: [
         {
-          path: 'customer',
-          name: 'dashboard-customer',
-          component: () => import(/* webpackChunkName: "dashboard-customer" */ './components/CustomerList.vue'),
+          path: 'farmer',
+          name: 'dashboard-farmer',
+          component: () => import(/* webpackChunkName: "dashboard-farmer" */ './components/FarmerList.vue'),
         },
         {
-          path: 'producer',
-          name: 'dashboard-producer',
-          component: () => import(/* webpackChunkName: "dashboard-producer" */ './components/ProducerList.vue'),
-        }
+          path: 'customers',
+          name: 'dashboard-customers',
+          component: () => import(/* webpackChunkName: "dashboard-customers" */ './components/CustomerList.vue'),
+        },
       ]
     },
   ]
