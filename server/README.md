@@ -1,7 +1,7 @@
 # backend
 backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
 
-# SIGNUP and LOGIN User as a customer or producer (role)
+# SIGNUP and LOGIN User as a customer or farmer (role)
 # SIGNUP
 ### URL : '/register'
 * METHOD : POST
@@ -11,7 +11,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
         name : "STRING"
         email : "STRING"
         password : "STRING"
-        role: "producer/customer"
+        role: "farmer/customer"
     }
     ```
 * RESPONSE STATUS : 201
@@ -20,7 +20,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
         id: < ref_User_ObjectId >
         name : "STRING"
         email : "STRING" 
-        role : "producer/customer"
+        role : "farmer/customer"
         createdAt : "TIMESTAMPS"
         updatedAt : "TIMESTAMPS"
     }
@@ -47,7 +47,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
         id : < ref_User_ObjectId >
         name : "STRING"
         email : "STRING"
-        role: "producer/costumer"
+        role: "farmer/costumer"
         createdAt : "TIMESTAMPS"
         updatedAt : "TIMESTAMPS"
     }
@@ -65,7 +65,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
     }
     ```
 
-# CRUD product for producer
+# CRUD product for farmer
 
 # CREATE PRODUCT 
 ### URL : '/product/:userId'
@@ -97,7 +97,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
         message : "Internal server error"
     }
     ```'
-# GET ALL LIST PRODUCTS OF PRODUCER
+# GET ALL LIST PRODUCTS OF FARMER
 ### URL : '/product/all/:userId'
 * METHOD : GET
 * RESPONSE STATUS : 200
@@ -118,7 +118,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
         message : "internal server error"
     }
     ```
-# GET A PRODUCT OF PRODUCER
+# GET A PRODUCT OF FARMER
 ### URL : '/product/:id'
 * METHOD : GET
 * RESPONSE STATUS : 200
@@ -139,7 +139,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
         message : "internal server error"
     }
     ```
-# UPDATE A PRODUCT OF PRODUCER
+# UPDATE A PRODUCT OF FARMER
 ### URL : '/product/:id'
 * METHOD : PUT
 * BODY : 
@@ -170,7 +170,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
         message : "internal server error"
     }
     ```
-# DELETE A PRODUCT OF PRODUCER
+# DELETE A PRODUCT OF FARMER
 ### URL : '/product/:id'
 * METHOD : DELETE
 * RESPONSE STATUS : 200
@@ -188,7 +188,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
 
 #  CRUD FOR CUSTOMER
 
-# READ ALL LIST PRODUCTS OF ALL PRODUCER
+# READ ALL LIST PRODUCTS OF ALL FARMER
 ## set value's userId on parameter to be "null" (it must be string)
 ### example : http://localhost:3000/product/all/null
 ### URL : '/product/all/null'
