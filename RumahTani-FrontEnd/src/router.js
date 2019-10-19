@@ -50,14 +50,14 @@ export default new Router({
               /* webpackChunkName: "dashboard-customer" */ "./components/CustomerList.vue"
             )
         },
-        {
-          path: "producer",
-          name: "dashboard-producer",
-          component: () =>
-            import(
-              /* webpackChunkName: "dashboard-producer" */ "./components/ProducerList.vue"
-            )
-        },
+        // {
+        //   path: "producer",
+        //   name: "dashboard-producer",
+        //   component: () =>
+        //     import(
+        //       /* webpackChunkName: "dashboard-producer" */ "./components/ProducerList.vue"
+        //     )
+        // },
         {
           path: "farmer",
           name: "dashboard-farmer",
