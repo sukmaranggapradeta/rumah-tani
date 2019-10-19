@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h3>Costumer</h3>
+        <h3>Farmer</h3>
         <table>
             <thead>
                 <tr>
@@ -11,10 +11,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(customer,index) in customerList" :key="index">
-                    <td>{{customer.name}}</td>
-                    <td>{{customer.email}}</td>
-                    <td>{{customer.createdAt}}</td>
+                <tr v-for="(farmer,index) in farmerList" :key="index">
+                    <td>{{farmer.name}}</td>
+                    <td>{{farmer.email}}</td>
+                    <td>{{farmer.createdAt}}</td>
                     <td class="lastTd"> 
                         <i class="small material-icons delete">delete_forever</i> 
                         <i class="small material-icons edit">edit</i> 
@@ -28,20 +28,20 @@
 <script>
 import axios from 'axios'
 export default {
-    name: 'dashboard-customerList',
+    name: 'dashboard-farmerlist',
     data() {
         return {
-            customerList: []
+            farmerList: []
         }
     },
     created() {
-        this.fetchCustomerList()
+        this.fetchFarmeList()
     },
     methods: {
-        fetchCustomerList() {
+        fetchFarmeList() {
             axios.get(`http://localhost:3000/user/customer`)
               .then(({data}) => {
-                  this.customerList = data
+                  this.farmerList = data
               })
               .catch(err => console.log(err,'err'))
         }

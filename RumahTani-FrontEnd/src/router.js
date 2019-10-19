@@ -57,6 +57,22 @@ export default new Router({
             import(
               /* webpackChunkName: "dashboard-producer" */ "./components/ProducerList.vue"
             )
+        },
+        {
+          path: "farmer",
+          name: "dashboard-farmer",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-farmer" */ "./components/FarmerList.vue"
+            )
+        },
+        {
+          path: "customers",
+          name: "dashboard-customers",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-customers" */ "./components/CustomerList.vue"
+            )
         }
       ]
     },
