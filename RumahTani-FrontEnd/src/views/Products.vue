@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container box-products">
     <div class="row">
       <div>
         <div class="center">
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     add_to_cart(productId) {
-      // console.log('dari product view')
+      console.log("dari product view", productId);
       this.$emit("add_to_cart", productId);
     },
     update_data_after_edit(data) {
@@ -60,7 +60,7 @@ export default {
           el.name = data.name;
           el.description = data.description;
           el.price = data.price;
-          el.image_url = data.image_url;
+          el.image = data.image;
           el.stock = data.stock;
         }
         return el;
@@ -80,11 +80,7 @@ export default {
     },
     fetchDataProducts() {
       myServer
-        .get("/products", {
-          headers: {
-            token: localStorage.getItem("token")
-          }
-        })
+        .get("/product/all/null")
         .then(({ data }) => {
           this.products = data;
         })
@@ -164,7 +160,19 @@ export default {
     }
   },
   created() {
-    this.fetchDataProducts();
+    // console.log(localStorage.getItem("role"));
+    if (localStorage.getItem("role") !== null) {
+      console.log("masuk nul");
+      this.fetchDataProducts();
+    } else {
+      this.$router.push("/login");
+    }
   }
 };
 </script>
+
+<style scoped>
+.box-products {
+  margin: 40px auto;
+}
+</style>

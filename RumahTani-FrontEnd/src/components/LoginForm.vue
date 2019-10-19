@@ -69,7 +69,13 @@ export default {
           localStorage.setItem("email", user.data.email);
           localStorage.setItem("role", user.data.role);
           this.$store.commit("userLogin");
-          this.$router.push("/");
+          if (user.data.role === "farmer") {
+            this.$router.push("/myStore");
+          } else if (user.data.role === "customer") {
+            this.$router.push("/products");
+          } else if (user.data.role === "admin") {
+            this.$router.push("/dashboard");
+          }
           Swal.fire({
             position: "center",
             type: "success",
@@ -83,8 +89,7 @@ export default {
           Swal.fire({
             type: "error",
             title: "Oops...",
-            text: `${err.response.data.message}`,
-            footer: "<a href>forget username/password?</a>"
+            text: `${err.response.data.message}`
           });
         });
     }

@@ -7,8 +7,10 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     isAdmin: false,
+    isCustomer: false,
+    isFarmer: false,
     userName: "",
-    countCart: null,
+    countCart: 1,
     notifCustomer: 0,
     notifAdmin: 0
   },
@@ -21,10 +23,22 @@ export default new Vuex.Store({
       } else {
         state.isAdmin = false;
       }
+      if (localStorage.getItem("role") === "customer") {
+        state.isCustomer = true;
+      }
+      if (localStorage.getItem("role") === "farmer") {
+        state.isFarmer = true;
+      }
     },
     userLogout(state) {
       state.isLogin = false;
       state.isAdmin = false;
+      state.isCustomer = false;
+      state.isFarmer = false;
+      localStorage.removeItem("email");
+      localStorage.removeItem("role");
+      localStorage.removeItem("name");
+      localStorage.removeItem("id");
     },
     setupCountCart(state, payload) {
       state.countCart = payload;

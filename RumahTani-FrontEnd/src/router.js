@@ -21,24 +21,50 @@ export default new Router({
       path: "/register",
       name: "register",
       component: () =>
-        import(/* webpackChunkName: "login" */ "./views/Register.vue")
+        import(/* webpackChunkName: "register" */ "./views/Register.vue")
+    },
+
+    {
+      path: "/addproduct",
+      name: "addproduct",
+      component: () =>
+        import(/* webpackChunkName: "addproduct" */ "./views/AddProduct.vue")
+    },
+    {
+      path: "/products",
+      name: "products",
+      component: () =>
+        import(/* webpackChunkName: "products" */ "./views/Products.vue")
     },
     {
       path: "/dashboard",
       name: "dashboard",
-      component: () => import(/* webpackChunkName: "dashboard" */ "./views/Dashboard.vue"),
+      component: () =>
+        import(/* webpackChunkName: "dashboard" */ "./views/Dashboard.vue"),
       children: [
         {
-          path: 'customer',
-          name: 'dashboard-customer',
-          component: () => import(/* webpackChunkName: "dashboard-customer" */ './components/CustomerList.vue'),
+          path: "customer",
+          name: "dashboard-customer",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-customer" */ "./components/CustomerList.vue"
+            )
         },
         {
-          path: 'producer',
-          name: 'dashboard-producer',
-          component: () => import(/* webpackChunkName: "dashboard-producer" */ './components/ProducerList.vue'),
+          path: "producer",
+          name: "dashboard-producer",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-producer" */ "./components/ProducerList.vue"
+            )
         }
       ]
     },
+    {
+      path: "/*",
+      name: "*",
+      component: () =>
+        import(/* webpackChunkName: "addproduct" */ "./views/NotFound404.vue")
+    }
   ]
 });

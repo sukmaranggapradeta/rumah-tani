@@ -35,7 +35,7 @@
               <div class="col s6 m6 l6">
                 <p>
                   <label>
-                    <input v-model="register_role" value="Customer" name="group1" type="radio" />
+                    <input v-model="register_role" value="customer" name="group1" type="radio" />
                     <span>Customer</span>
                   </label>
                 </p>
@@ -43,7 +43,7 @@
               <div class="col s6 m6 l6">
                 <p>
                   <label>
-                    <input v-model="register_role" value="Farmer" name="group1" type="radio" />
+                    <input v-model="register_role" value="farmer" name="group1" type="radio" />
                     <span>Farmer</span>
                   </label>
                 </p>
@@ -126,7 +126,7 @@ export default {
               type: "success",
               title: "Your Account has active, Please login",
               showConfirmButton: false,
-              timer: 1500
+              timer: 3500
             });
             this.$router.push("/login");
             console.log("newUser adalah", newUser);
