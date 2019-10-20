@@ -78,7 +78,7 @@ h6 {
   font-family: "B612 Mono", monospace;
 }
 .box-sayur {
-  height: 400px;
+  height: 360px;
   margin-bottom: 25px;
 }
 .card-image img {
@@ -91,6 +91,9 @@ h6 {
 .flex-action {
   display: flex;
   justify-content: space-around;
+}
+.card-content {
+  padding: 5px;
 }
 @media only screen and (max-width: 1366px) {
   .flex-action {

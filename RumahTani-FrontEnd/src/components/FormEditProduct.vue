@@ -3,8 +3,8 @@
     <div v-if="loading">
       <Loading />
     </div>
-    <div v-if="form_edit_page" class>
-      <form @submit.prevent="edit_product" class="col s12">
+    <div v-if="form_edit_page">
+      <form @submit.prevent="edit_product" class="col s12 m10 l10 offset-m1 offset-l1">
         <div class="row">
           <div id="inputtop" class="center">
             <div class="input-field col s12">
@@ -260,6 +260,9 @@ export default {
 </script>
 
 <style scoped>
+.edit-image {
+  width: 200px;
+}
 #buttonaddproduct {
   padding: 20px;
 }

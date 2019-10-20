@@ -18,7 +18,7 @@
         <span
           v-if="!isAdmin"
           @click="add_to_cart(product._id, product.name)"
-          class="btn-floating halfway-fab waves-effect waves-light red"
+          class="btn-floating halfway-fab waves-effect waves-light red hide-on-small-and-down"
         >
           <i class="material-icons">add_shopping_cart</i>
         </span>
@@ -29,17 +29,16 @@
         <h6 class="h6-product">IDR {{ product.price ? rupiah(product.price) +"/kg" : 0 }}</h6>
         <span class="text-product">{{ product.description }}</span>
       </div>
-      <div v-if="isFarmer" class="card-action">
-        <div class="row s12 m12 l12">
-          <span @click="trigger_edit_page(product._id)" class="btn orange lighten-2 small">
-            <i class="material-icons left">edit</i>EDIT
-          </span>
-        </div>
-        <div class="row s12 m12 l12">
-          <span @click="delete_product(product._id)" class="btn red darken-1 small">
-            <i class="material-icons right">delete_forever</i>DELETE
-          </span>
-        </div>
+      <div class="card-action flex-action hide-on-med-and-up">
+        <!-- <span @click="trigger_edit_page(product._id)" class="btn grey border darken-2 small">
+          <i class="material-icons left">edit</i>EDIT
+        </span>-->
+        <span
+          @click="add_to_cart(product._id, product.name)"
+          class="btn grey darken-3 small shopingCart"
+        >
+          <i class="material-icons">add_shopping_cart</i>BUY
+        </span>
       </div>
     </div>
   </div>
@@ -97,22 +96,43 @@ h6 {
   font-family: "B612 Mono", monospace;
 }
 .box-sayur {
-  height: 340px;
+  height: 310px;
 }
 .card-image img {
   height: 200px;
   object-fit: cover;
 }
-img {
-  /* cursor: pointer; */
-  /* height: 100%; */
+.card-content {
+  padding: 5px;
 }
 .footerimage {
   font-size: 10px;
 }
 @media only screen and (max-width: 768px) {
+  .flex-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-content: center; */
+    /* align-items: center;
+     */
+    /* text-align: center; */
+  }
+  .shopingCart {
+    display: inline-flex;
+    justify-content: center;
+  }
+  .card-action {
+    padding: 0;
+  }
+  .card-action span {
+    margin-bottom: 2px;
+  }
+  .card-content {
+    padding: 2px;
+  }
   .box-sayur {
-    height: 220px;
+    height: 200px;
   }
   .card-image img {
     height: 100px;
