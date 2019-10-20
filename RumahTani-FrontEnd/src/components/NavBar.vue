@@ -94,6 +94,7 @@
             <router-link class="sidenav-close" to="/mycarts">
               My Carts
               <i class="material-icons right">local_grocery_store</i>
+              {{ countCart }}
             </router-link>
           </li>
           <li v-if="isLogin && isCustomer">
@@ -153,7 +154,7 @@
               <router-link to="/carts">
                 My Carts
                 <i class="material-icons right">shopping_cart</i>
-                {{ countCart }}
+                <span>{{ countCart }}</span>
               </router-link>
             </li>
             <li v-if="isLogin && isCustomer">

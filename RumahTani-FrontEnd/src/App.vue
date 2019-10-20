@@ -33,8 +33,8 @@ export default {
     };
   },
   methods: {
-    add_to_cart(productId) {
-      console.log("dari APP", productId);
+    add_to_cart(payload) {
+      console.log("dari APP", payload.productId, payload.productName);
       myServer
         .get(`/cart/all/${localStorage.getItem("id")}`)
         .then(({ data }) => {
@@ -44,7 +44,7 @@ export default {
           let beforeQuantity = 0;
           if (data !== null) {
             data.forEach(element => {
-              if (element.productId._id === productId) {
+              if (element.productId._id === payload.productId) {
                 isOnCart = true;
                 idCart = element._id;
                 beforeQuantity = element.quantity;
@@ -60,14 +60,14 @@ export default {
               .then(({ data }) => {
                 console.log("data", data);
                 console.log("myCart", this.myCarts);
-                let myCartsTemp = this.myCarts;
-                myCartsTemp.map(el => {
-                  if (el._id === data._id) {
-                    this.total += el.product.price;
-                    el.quantity = data.quantity;
-                  }
-                });
-                M.toast({ html: `${data.product.name} added to cart` });
+                // let myCartsTemp = this.myCarts;
+                // myCartsTemp.map(el => {
+                //   if (el._id === data._id) {
+                //     this.total += el.product.price;
+                //     el.quantity = data.quantity;
+                //   }
+                // });
+                M.toast({ html: `${payload.productName} added to cart` });
                 // console.log(data)
               })
               .catch(err => {
@@ -81,7 +81,7 @@ export default {
             console.log("masuk else cart blum ada");
             myServer
               .post("/cart", {
-                productId: productId,
+                productId: payload.productId,
                 quantity: 1,
                 userId: localStorage.getItem("id")
               })
@@ -90,7 +90,7 @@ export default {
                 this.$store.commit("plusCountCart");
                 this.myCarts.push(data);
                 // this.total += data.product.price;
-                M.toast({ html: `${data.productId} added to cart` });
+                M.toast({ html: `${payload.productName} added to cart` });
               })
               .catch(err => {
                 // console.log(err)
@@ -230,6 +230,7 @@ export default {
           this.total = null;
           this.myCarts = data;
           console.log(this.myCarts.length, "ini length cart");
+          console.log("data user cart", data);
           this.$store.commit("setupCountCart", this.myCarts.length);
           this.myCarts.forEach(el => {
             this.total += el.product.price * el.quantity;

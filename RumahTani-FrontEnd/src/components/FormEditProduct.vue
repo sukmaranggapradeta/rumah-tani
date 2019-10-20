@@ -1,10 +1,7 @@
 <template>
   <div class="card">
     <div v-if="loading">
-      <div class="progress">
-        <div class="indeterminate"></div>
-      </div>
-      <h1>L.O.A.D.I.N.G.</h1>
+      <Loading />
     </div>
     <div v-if="form_edit_page" class>
       <form @submit.prevent="edit_product" class="col s12">
@@ -75,9 +72,15 @@
               </div>
             </div>
           </div>
+          <!-- {{data_edit}} -->
           <div class="col l6 m6">
             <div class="center edit-image">
-              <img id="imagetemp" :src="edit_urlTemp" alt />
+              <img
+                id="imagetemp"
+                :src="image_local ? image_local : require(`../../../server/public/products/${edit_urlTemp}`)"
+                alt
+              />
+              <!-- <img src alt /> -->
             </div>
           </div>
         </div>
@@ -113,9 +116,13 @@
 <script>
 import Swal from "sweetalert2";
 import myServer from "../api/myServer.js";
+import Loading from "../components/Loading";
 
 export default {
   props: ["edit_mode", "data_edit"],
+  components: {
+    Loading
+  },
   data() {
     return {
       loading: false,
@@ -125,7 +132,8 @@ export default {
       edit_product_price: this.data_edit.price,
       edit_product_stock: this.data_edit.stock,
       file: "",
-      edit_urlTemp: this.data_edit.image_url
+      edit_urlTemp: this.data_edit.image,
+      image_local: false
     };
   },
   methods: {
@@ -167,22 +175,26 @@ export default {
         });
         this.loading = false;
         this.form_edit_page = true;
-      } else if (this.data_edit.image_url === this.edit_urlTemp) {
-        // console.log('foto sama')
+      } else if (
+        this.data_edit.image === this.edit_urlTemp &&
+        !this.image_local
+      ) {
+        console.log("foto sama");
         this.update_product(this.urlTemp);
       } else {
-        // console.log('foto beda')
+        console.log("foto beda");
         let formData = new FormData();
         formData.append("image", this.file);
         myServer
           .post(`/products/image/upload`, formData, {
             headers: {
-              token: localStorage.getItem("token"),
               "Content-Type": "multipart/form-data"
             }
           })
           .then(({ data }) => {
-            this.update_product(data);
+            console.log(data.filename, "upload image datanya");
+            this.update_product(data.filename);
+            this.image_local = false;
           })
           .catch(err => {
             Swal.fire({
@@ -195,22 +207,15 @@ export default {
     },
     update_product(imageUrl) {
       myServer
-        .put(
-          `/products/${this.data_edit._id}`,
-          {
-            name: this.edit_product_name,
-            description: this.edit_product_description,
-            image_url: imageUrl,
-            price: this.edit_product_price,
-            stock: this.edit_product_stock
-          },
-          {
-            headers: {
-              token: localStorage.getItem("token")
-            }
-          }
-        )
+        .put(`/product/${this.data_edit._id}`, {
+          name: this.edit_product_name,
+          description: this.edit_product_description,
+          image: imageUrl,
+          price: this.edit_product_price,
+          stock: this.edit_product_stock
+        })
         .then(({ data }) => {
+          console.log("selesai di update");
           Swal.fire({
             position: "center",
             type: "success",
@@ -225,6 +230,7 @@ export default {
           this.edit_product_stock = "";
           this.file = "";
           this.edit_urlTemp = "";
+          this.image_local = false;
           this.loading = false;
           this.form_edit_page = true;
           this.update_data_after_edit(data);
@@ -243,9 +249,11 @@ export default {
       this.$emit("update_data_after_edit", data);
     },
     handleFileUpload() {
+      console.log("handleFileUpload masuk");
       this.file = this.$refs.file.files[0];
       const file = this.$refs.file.files[0];
-      this.edit_urlTemp = URL.createObjectURL(file);
+      this.image_local = URL.createObjectURL(file);
+      console.log("selesai");
     }
   }
 };
