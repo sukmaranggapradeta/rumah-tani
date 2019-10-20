@@ -170,50 +170,49 @@ export default {
         let formData = new FormData();
         formData.append("image", this.file);
         myServer
-          // .post(`/products/image/upload`, formData, {
-          //   headers: {
-          //     token: localStorage.getItem("token"),
-          //     "Content-Type": "multipart/form-data"
-          //   }
-          // })
-          // .then(({ data }) => {
-          //   return myServer
-          .post("/product/" + localStorage.getItem("id"), {
-            name: this.product_name,
-            description: this.product_description,
-            image:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWuUntxDF1wPw3IpYwZ83mze_wMCxHrv0Kz23PfwpTABsXVsSK",
-            price: this.product_price,
-            stock: this.product_stock
+          .post(`/products/image/upload`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
           })
           .then(({ data }) => {
-            Swal.fire({
-              position: "center",
-              type: "success",
-              title: `${data.name} success added`,
-              showConfirmButton: false,
-              timer: 2500
-            });
-            this.loading = false;
-            this.form_add_page = true;
-            this.product_name = "";
-            this.product_description = "";
-            this.product_image = "";
-            this.product_price = "";
-            this.product_stock = "";
-            this.file = "";
-            this.urlTemp = "";
-          })
-          .catch(err => {
-            Swal.fire({
-              type: "error",
-              title: "Oops...",
-              text: `${err.response.data.message}`
-            });
-            this.loading = false;
-            this.form_add_page = true;
+            console.log("data dari upload", data, data.filename);
+            return myServer
+              .post("/product/" + localStorage.getItem("id"), {
+                name: this.product_name,
+                description: this.product_description,
+                image: data.filename,
+                price: this.product_price,
+                stock: this.product_stock
+              })
+              .then(({ data }) => {
+                Swal.fire({
+                  position: "center",
+                  type: "success",
+                  title: `${data.name} success added`,
+                  showConfirmButton: false,
+                  timer: 2500
+                });
+                this.loading = false;
+                this.form_add_page = true;
+                this.product_name = "";
+                this.product_description = "";
+                this.product_image = "";
+                this.product_price = "";
+                this.product_stock = "";
+                this.file = "";
+                this.urlTemp = "";
+              })
+              .catch(err => {
+                Swal.fire({
+                  type: "error",
+                  title: "Oops...",
+                  text: `${err.response.data.message}`
+                });
+                this.loading = false;
+                this.form_add_page = true;
+              });
           });
-        // });
       }
     },
     handleFileUpload() {

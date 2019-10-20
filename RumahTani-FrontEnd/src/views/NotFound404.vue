@@ -3,7 +3,9 @@
     <!-- <h1>404 NOT FOUND</h1> -->
     <img class="notfound" src="../assets/404-spacer.gif" alt />
     <h6>Looks like you are lost in space</h6>
-    <button class="btn grey darken-4">back to Home</button>
+    <router-link to="/">
+      <button class="btn grey darken-4">back to Home</button>
+    </router-link>
   </div>
 </template>
 
