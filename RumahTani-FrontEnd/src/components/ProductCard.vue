@@ -9,6 +9,8 @@
         <!-- INI BISA -->
         <!-- <img src="../../../server/public/products/image-1571543040368.jpg" alt /> -->
 
+        <!-- <img :src="require(`../../../server/public/products/${product.image}`)" alt /> -->
+        <!-- <img :src="imageLocal" alt /> -->
         <!-- <img
           :src="product.image ? `../../../server/public/products/${product.image}`  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT7kD200qOiwwDrwuDcHP_VFeXZBXmbgJfTQuzaINW_CK9z3L70'"
         />-->
