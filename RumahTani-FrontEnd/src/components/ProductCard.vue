@@ -2,13 +2,8 @@
   <div class="col s6 m6 l4">
     <div class="card hoverable">
       <div class="card-image">
-        <!-- INI TAK BISA -->
-        <img :src="`../../../server/public/products/${product.image}`" alt />
+        <img :src="require(`../../../server/public/products/${product.image}`)" alt />
         <img :src="imageLocal" alt />
-
-        <!-- INI BISA -->
-        <img src="../../../server/public/products/image-1571543040368.jpg" alt />
-
         <!-- <img
           :src="product.image ? `../../../server/public/products/${product.image}`  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT7kD200qOiwwDrwuDcHP_VFeXZBXmbgJfTQuzaINW_CK9z3L70'"
         />-->
