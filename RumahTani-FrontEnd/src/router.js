@@ -37,6 +37,12 @@ export default new Router({
         import(/* webpackChunkName: "products" */ "./views/Products.vue")
     },
     {
+      path: "/myproducts",
+      name: "myproducts",
+      component: () =>
+        import(/* webpackChunkName: "myproducts" */ "./views/MyProducts.vue")
+    },
+    {
       path: "/dashboard",
       name: "dashboard",
       component: () =>

@@ -5,25 +5,31 @@
         <div class="center">
           <router-view></router-view>
         </div>
-        <FormEditProduct
-          class="center"
-          v-if="edit_mode"
-          :edit_mode="edit_mode"
-          :data_edit="data_edit"
-          @cancel_edit="cancel_edit"
-          @update_data_after_edit="update_data_after_edit"
-        ></FormEditProduct>
+        <div v-if="!isLoading">
+          <FormEditProduct
+            class="center"
+            v-if="edit_mode"
+            :edit_mode="edit_mode"
+            :data_edit="data_edit"
+            @cancel_edit="cancel_edit"
+            @update_data_after_edit="update_data_after_edit"
+          ></FormEditProduct>
 
-        <ProductCard
-          v-else
-          v-for="product in products"
-          :key="product.id"
-          :product="product"
-          @delete_product="delete_product"
-          @update_product="update_product"
-          @trigger_edit_page="trigger_edit_page"
-          @add_to_cart="add_to_cart"
-        ></ProductCard>
+          <ProductCard
+            v-else
+            v-for="product in products"
+            :key="product.id"
+            :product="product"
+            @delete_product="delete_product"
+            @update_product="update_product"
+            @trigger_edit_page="trigger_edit_page"
+            @add_to_cart="add_to_cart"
+          ></ProductCard>
+        </div>
+
+        <div v-if="isLoading">
+          <Loading />
+        </div>
       </div>
     </div>
   </div>
@@ -34,24 +40,27 @@ import Swal from "sweetalert2";
 import myServer from "../api/myServer.js";
 import ProductCard from "../components/ProductCard";
 import FormEditProduct from "../components/FormEditProduct";
+import Loading from "../components/Loading";
 // import { truncate } from 'fs'
 
 export default {
   components: {
     ProductCard,
-    FormEditProduct
+    FormEditProduct,
+    Loading
   },
   data() {
     return {
       products: [],
       edit_mode: false,
-      data_edit: ""
+      data_edit: "",
+      isLoading: true
     };
   },
   methods: {
-    add_to_cart(productId) {
-      console.log("dari product view", productId);
-      this.$emit("add_to_cart", productId);
+    add_to_cart(payload) {
+      console.log("dari product view", payload);
+      this.$emit("add_to_cart", payload);
     },
     update_data_after_edit(data) {
       this.products = this.products.map(el => {
@@ -83,6 +92,7 @@ export default {
         .get("/product/all/null")
         .then(({ data }) => {
           this.products = data;
+          this.isLoading = false;
         })
         .catch(err => {
           Swal.fire({

@@ -1,43 +1,23 @@
 <template>
   <div class="col s6 m4 l3">
     <div class="card hoverable box-sayur">
+      <!-- {{product.image}} -->
       <div class="card-image">
-        <!-- INI TAK BISA -->
-        <img :src="require(`../../../server/public/products/${product.image}`)" alt />
-        <!-- <img :src="imageLocal" alt /> -->
-
-        <!-- INI BISA -->
-        <!-- <img src="../../../server/public/products/image-1571543040368.jpg" alt /> -->
-
-        <!-- <img :src="require(`../../../server/public/products/${product.image}`)" alt /> -->
-        <!-- <img :src="imageLocal" alt /> -->
-        <!-- <img
-          :src="product.image ? `../../../server/public/products/${product.image}`  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT7kD200qOiwwDrwuDcHP_VFeXZBXmbgJfTQuzaINW_CK9z3L70'"
-        />-->
-        <!-- <h1 class="card-title">{{ product.name }}</h1> -->
-        <span
-          v-if="!isAdmin"
-          @click="add_to_cart(product._id, product.name)"
-          class="btn-floating halfway-fab waves-effect waves-light red hide-on-small-and-down"
-        >
-          <i class="material-icons">add_shopping_cart</i>
-        </span>
+        <img :src="product ? require(`../../../server/public/products/${product.image}`) : ``" alt />
       </div>
       <div class="card-content">
+        <!-- {{product}} -->
         <span class="h6-product">{{ product.name }}</span>
 
         <h6 class="h6-product">IDR {{ product.price ? rupiah(product.price) +"/kg" : 0 }}</h6>
         <span class="text-product">{{ product.description }}</span>
       </div>
-      <div class="card-action flex-action hide-on-med-and-up">
-        <!-- <span @click="trigger_edit_page(product._id)" class="btn grey border darken-2 small">
+      <div v-if="isFarmer" class="card-action flex-action">
+        <span @click="trigger_edit_page(product._id)" class="btn grey border darken-2 small">
           <i class="material-icons left">edit</i>EDIT
-        </span>-->
-        <span
-          @click="add_to_cart(product._id, product.name)"
-          class="btn grey darken-3 small shopingCart"
-        >
-          <i class="material-icons">add_shopping_cart</i>BUY
+        </span>
+        <span @click="delete_product(product._id)" class="btn grey darken-2 small">
+          <i class="material-icons right">delete_forever</i>DELETE
         </span>
       </div>
     </div>
@@ -65,9 +45,11 @@ export default {
       this.$emit("add_to_cart", { productId, productName });
     },
     delete_product(id) {
+      console.log("delete_product", id);
       this.$emit("delete_product", id);
     },
     trigger_edit_page(id) {
+      console.log("trigger_edit_page dari card", id);
       this.$emit("trigger_edit_page", id);
     },
     rupiah(value) {
@@ -96,31 +78,28 @@ h6 {
   font-family: "B612 Mono", monospace;
 }
 .box-sayur {
-  height: 310px;
+  height: 360px;
+  margin-bottom: 25px;
 }
 .card-image img {
   height: 200px;
   object-fit: cover;
 }
-.card-content {
-  padding: 5px;
-}
 .footerimage {
   font-size: 10px;
 }
-@media only screen and (max-width: 768px) {
+.flex-action {
+  display: flex;
+  justify-content: space-around;
+}
+.card-content {
+  padding: 5px;
+}
+@media only screen and (max-width: 1366px) {
   .flex-action {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* align-content: center; */
-    /* align-items: center;
-     */
-    /* text-align: center; */
-  }
-  .shopingCart {
-    display: inline-flex;
-    justify-content: center;
+    /* justify-content: space-around; */
   }
   .card-action {
     padding: 0;
@@ -132,10 +111,30 @@ h6 {
     padding: 2px;
   }
   .box-sayur {
-    height: 200px;
+    height: 355px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .flex-action {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+  }
+  .card-action {
+    padding: 0;
+  }
+  .card-action span {
+    margin-bottom: 2px;
+  }
+  .card-content {
+    padding: 2px;
+  }
+
+  .box-sayur {
+    height: 250px;
   }
   .card-image img {
-    height: 100px;
+    height: 110px;
   }
   .text-product {
     font-size: 10px;

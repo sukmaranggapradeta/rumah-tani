@@ -1,14 +1,15 @@
 <template>
   <div class="card">
     <div v-if="loading" class>
-      <div class="progress">
+      <Loading />
+      <!-- <div class="progress">
         <div class="indeterminate"></div>
       </div>
       <h1>L.O.A.D.I.N.G.</h1>
-      <img src="../assets/loading-flower.svg" alt />
+      <img src="../assets/loading-flower.svg" alt />-->
     </div>
-    <div v-if="form_add_page" class="container">
-      <form @submit.prevent="add_product" class="col s12">
+    <div v-if="form_add_page && !loading" class="container">
+      <form @submit.prevent="add_product" class="col s12 m10 l10 offset-m1 offset-l1">
         <div class="row">
           <div id="inputtop" class="center">
             <div class="input-field col s12">
@@ -101,9 +102,13 @@
 <script>
 import Swal from "sweetalert2";
 import myServer from "../api/myServer.js";
+import Loading from "../components/Loading";
 
 export default {
   props: ["edit_mode", "product_name_selected"],
+  components: {
+    Loading
+  },
   data() {
     return {
       loading: false,
@@ -193,7 +198,7 @@ export default {
                   showConfirmButton: false,
                   timer: 2500
                 });
-                this.loading = false;
+                // this.loading = false;
                 this.form_add_page = true;
                 this.product_name = "";
                 this.product_description = "";
@@ -227,6 +232,9 @@ export default {
 </script>
 
 <style scoped>
+.edit-image {
+  max-width: 300px;
+}
 #buttonaddproduct {
   padding: 20px;
 }
