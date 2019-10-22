@@ -13,7 +13,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(customer,index) in customerList" :key="index">
-                        <td v-if="index !== indexEditUser">{{customer.name}}</td>
+                        <td v-if="index !== indexEditUser"><span>{{customer.name}}</span></td>
                         <td v-if="index === indexEditUser" class="editInput" >
                             <input v-model="newUser.name" placeholder="Placeholder" id="name" type="text" class="validate">
                         </td>
@@ -110,5 +110,10 @@ export default {
 }
 .row{
     min-height: 70vh;
+}
+span:hover {
+    cursor: pointer;
+    color:blue;
+    text-decoration-line: underline
 }
 </style>

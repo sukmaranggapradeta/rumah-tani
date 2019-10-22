@@ -73,7 +73,15 @@ export default new Router({
             import(
               /* webpackChunkName: "dashboard-customers" */ "./components/CustomerList.vue"
             )
-        }
+        },
+        {
+          path: "productList/:userId",
+          name: "dashboard-productList",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-productList" */ "./components/ProductList.vue"
+            )
+        },
       ]
     },
     {

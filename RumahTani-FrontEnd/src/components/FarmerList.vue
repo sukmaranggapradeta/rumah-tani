@@ -13,7 +13,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(farmer,index) in farmerList" :key="index">
-                        <td v-if="index !== indexEditUser">{{farmer.name}}</td>
+                        <td v-if="index !== indexEditUser"><span @click="handleAllProduct(farmer._id)">{{farmer.name}}</span></td>
                         <td v-if="index === indexEditUser" class="editInput" >
                             <input v-model="newUser.name" placeholder="Placeholder" id="name" type="text" class="validate">
                         </td>
@@ -50,7 +50,8 @@ export default {
             newUser: {
                 name: '',
                 email: ''
-            }
+            },
+            productList: []
         }
     },
     created() {
@@ -87,6 +88,9 @@ export default {
         },
         cancelEdit(userId) {
             this.indexEditUser = false
+        },
+        handleAllProduct(userId) {
+            this.$router.push(`/dashboard/productList/${userId}`)
         }
     }
 }
@@ -114,5 +118,10 @@ export default {
 }
 .row{
     min-height: 70vh;
+}
+span:hover {
+    cursor: pointer;
+    color:blue;
+    text-decoration-line: underline
 }
 </style>
