@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="footer-copyright white black-text">
-        <div class="container">© 2019 Armand Maulana</div>
+        <div class="container">© 2019 Rumah Tani</div>
       </div>
     </footer>
   </div>
