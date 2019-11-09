@@ -4,10 +4,9 @@ var upload = multer({ dest: "./contents" });
 
 class ControllerProduct {
   static create(req, res, next) {
-    console.log("masuk create");
-    let { name, description, stock, image, price } = req.body;
+    let { name, description, stock, image, price, satuan } = req.body;
     let { userId } = req.params;
-    Product.create({ name, description, image, stock, price, userId })
+    Product.create({ name, description, image, stock, price, satuan, userId })
       .then((data) => {
         res.status(201).json(data);
       })
