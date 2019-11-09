@@ -12,7 +12,13 @@ let transactionSchema = new mongoose.Schema({
     totalPrice: {
         type: String
     },
-    carts: [Object]
+    carts: [Object],
+    receiverData: {
+        type: Object
+    },
+    paymentSlip: {
+        type: String
+    }
 },{ timestamps: true })
 
 let Transaction = mongoose.model('Transaction', transactionSchema)

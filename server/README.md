@@ -331,3 +331,93 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
         message : "internal server error"
     }
     ```
+# CREATE TRANSACTION AFTER CLICKING CHECKOUT FROM CART
+### URL : '/transaction/:userid'
+* METHOD : POST
+* BODY : 
+    ```
+    [
+        {
+            totalPrice : Number/Integer
+            carts : [
+                {
+                    userId : < ref_User_ObjectId >,
+                    productId : < ref_Product_ObjectId >,
+                    quantity: Number
+                }
+            ]
+        }
+    ]
+    ```
+* RESPONSE STATUS : 201
+    ``` 
+    OUTPUT : {
+        totalPrice : < ref_User_ObjectId >
+        userId : < ref_Product_ObjectId >
+        status : "pending"
+        carts: [
+            userId: < ref_User_ObjectId >,
+            productId: < ref_Product_ObjectId >,
+        ]
+        receiverData: Object
+        paymentSlip: String
+        createdAt : "TIMESTAMPS"
+        updatedAt : "TIMESTAMPS"
+    }
+    ```
+* RESPONSE STATUS : 500
+    ```
+    OUTPUT {
+        message : "internal server error"
+    }
+    ```
+# GET TRANSACTION AFTER CHECKOUT
+### URL : '/transaction/:id'
+* METHOD : GET
+* RESPONSE STATUS : 200
+    ``` 
+    OUTPUT : {
+        status : "pending"
+        carts: [
+            userId: < ref_User_ObjectId >,
+            productId: < ref_Product_ObjectId >,
+        ]
+        receiverData: Object
+        paymentSlip: String
+        totalPrice : < ref_User_ObjectId >
+        userId : < ref_Product_ObjectId >
+        createdAt : "TIMESTAMPS"
+        updatedAt : "TIMESTAMPS"
+    }
+    ```
+* RESPONSE STATUS : 500
+    ```
+    OUTPUT {
+        message : "internal server error"
+    }
+    ```
+# PUT TRANSACTION AFTER CONFIRM TRANSACTION
+### URL : '/transaction/:id'
+* METHOD : PUT
+* RESPONSE STATUS : 200
+    ``` 
+    OUTPUT : {
+        status : "success"
+        carts: [
+            userId: < ref_User_ObjectId >,
+            productId: < ref_Product_ObjectId >,
+        ]
+        receiverData: Object
+        paymentSlip: String
+        totalPrice : < ref_User_ObjectId >
+        userId : < ref_Product_ObjectId >
+        createdAt : "TIMESTAMPS"
+        updatedAt : "TIMESTAMPS"
+    }
+    ```
+* RESPONSE STATUS : 500
+    ```
+    OUTPUT {
+        message : "internal server error"
+    }
+    ```
