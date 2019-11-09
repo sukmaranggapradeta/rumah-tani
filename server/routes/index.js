@@ -54,34 +54,15 @@ route.get("/authenticate", authenticate, (req, res) => {
 });
 route.post("/register", ControllerUser.create);
 route.post("/login", ControllerUser.login);
-
 route.get("/user/:role", ControllerUser.findAll);
 route.get("/user/:userId", ControllerUser.findOne);
 route.put("/user/:userId", ControllerUser.update);
 route.delete("/user/:userId", ControllerUser.delete);
-
-// router.get('/public/products/:imageName', (req, res) => {
-//     var filename = req.params.imageName;
-
-//     db.collection('mycollection').findOne({'_id': ObjectId(filename) }, (err, result) => {
-
-//         if (err) return console.log(err)
-
-//        res.contentType('image/jpeg');
-//        res.send(result.image.buffer)
-
-//       })
-//     })
-
-route.post("/products/image/upload", upload.single("image"), function(
-  req,
-  res,
-  next
-) {
-  console.log("masuk upload image", req.file);
-  //   console.log("req.body", req.body);
+route.post("/products/image/upload", upload.single("image"), function(req,res,next) {
   res.status(201).json(req.file);
-  // req.body will hold the text fields, if there were any
+});
+route.post("/transaksi/image/upload", upload.single("image"), function(req,res,next) {
+  res.status(201).json(req.file);
 });
 route.post("/product/:userId", ControllerProduct.create);
 route.get("/product/all/:userId", ControllerProduct.findAll); // userId : 'null' to get All data for consumer

@@ -399,6 +399,14 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
 # PUT TRANSACTION AFTER CONFIRM TRANSACTION
 ### URL : '/transaction/:id'
 * METHOD : PUT
+* BODY : 
+    ```
+        {
+            status : 'success'
+            receiverData: Object -> (alamat, nama dsb.Di satuin)
+            paymentSlip: String -> (ini url image pake routing di bawah ada routenya)
+        }
+    ```
 * RESPONSE STATUS : 200
     ``` 
     OUTPUT : {
@@ -414,6 +422,37 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
         createdAt : "TIMESTAMPS"
         updatedAt : "TIMESTAMPS"
     }
+    ```
+* RESPONSE STATUS : 500
+    ```
+    OUTPUT {
+        message : "internal server error"
+    }
+    ```
+
+# UPLOAD IMAGE BUKTI PEMBAYARAN
+### URL : '/transaksi/image/upload' 
+* METHOD : POST
+* sama kaya upload image pass add product
+
+# GET ALL TRANSACTION 
+### URL : '/transaction/all/:userId'
+* METHOD : GET
+* RESPONSE STATUS : 200
+    ``` 
+    OUTPUT : [{
+        status : "success"
+        carts: [
+            userId: < ref_User_ObjectId >,
+            productId: < ref_Product_ObjectId >,
+        ]
+        receiverData: Object
+        paymentSlip: String
+        totalPrice : < ref_User_ObjectId >
+        userId : < ref_Product_ObjectId >
+        createdAt : "TIMESTAMPS"
+        updatedAt : "TIMESTAMPS"
+    }]
     ```
 * RESPONSE STATUS : 500
     ```
