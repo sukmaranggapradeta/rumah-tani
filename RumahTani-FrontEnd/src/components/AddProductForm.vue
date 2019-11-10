@@ -21,14 +21,14 @@
                 type="text"
                 class="validate"
               />
-              <label for="icon_prefix">Name</label>
+              <label for="icon_prefix">Nama</label>
             </div>
           </div>
           <div class="center">
             <div class="input-field col s12">
               <i class="material-icons prefix">D</i>
               <textarea v-model="product_description" id="textarea1" class="materialize-textarea"></textarea>
-              <label for="textarea1">Description</label>
+              <label for="textarea1">Deskripsi</label>
             </div>
           </div>
           <div class="row">
@@ -37,14 +37,19 @@
                 <div class="input-field col s12">
                   <i class="material-icons prefix">P</i>
                   <input v-model="product_price" id="product_price" type="number" class="validate" />
-                  <label for="product_price">Price</label>
+                  <label for="product_price">Harga</label>
+                </div>
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">S</i>
+                  <input v-model="product_stock" id="product_stock" type="number" class="validate" />
+                  <label for="product_stock">Stok</label>
                 </div>
               </div>
               <div class="left">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">S</i>
-                  <input v-model="product_stock" id="product_stock" type="number" class="validate" />
-                  <label for="product_stock">Stock</label>
+                  <input v-model="product_type" id="product_type" type="text" class="validate" />
+                  <label for="product_type">Satuan</label>
                 </div>
               </div>
             </div>
@@ -55,7 +60,7 @@
             <div class="file-field input-field">
               <div class="btn grey darken-3">
                 <i class="material-icons right">image</i>
-                <span>Image</span>
+                <span>Gambar</span>
                 <input type="file" ref="file" v-on:change="handleFileUpload()" />
               </div>
               <div class>
@@ -76,20 +81,20 @@
             type="submit"
             name="action"
           >
-            ADD PRODUCT
+            TAMBAH PRODUK
             <i class="material-icons right">add</i>
           </button>
         </div>
         <div v-if="edit_mode" class="center row">
           <div class="col">
             <button class="btn waves-effect waves-light" type="submit" name="action">
-              CANCEL
+              BATAL
               <i class="material-icons left">settings_backup_restore</i>
             </button>
           </div>
           <div class="col">
             <button class="btn waves-effect waves-light" type="submit" name="action">
-              EDIT PRODUCT
+              SUNTING PRODUK
               <i class="material-icons right">edit</i>
             </button>
           </div>
@@ -117,6 +122,7 @@ export default {
       product_description: "",
       product_image: "",
       product_price: "",
+      product_type: "",
       product_stock: "",
       file: "",
       urlTemp: ""
@@ -188,6 +194,7 @@ export default {
                 description: this.product_description,
                 image: data.filename,
                 price: this.product_price,
+                satuan: this.product_type,
                 stock: this.product_stock
               })
               .then(({ data }) => {
@@ -198,12 +205,13 @@ export default {
                   showConfirmButton: false,
                   timer: 2500
                 });
-                // this.loading = false;
+                this.loading = false;
                 this.form_add_page = true;
                 this.product_name = "";
                 this.product_description = "";
                 this.product_image = "";
                 this.product_price = "";
+                this.product_type = "";
                 this.product_stock = "";
                 this.file = "";
                 this.urlTemp = "";

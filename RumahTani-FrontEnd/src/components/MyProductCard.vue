@@ -8,16 +8,18 @@
       <div class="card-content">
         <!-- {{product}} -->
         <span class="h6-product">{{ product.name }}</span>
-
-        <h6 class="h6-product">IDR {{ product.price ? rupiah(product.price) +"/kg" : 0 }}</h6>
+        <!-- {{product}} -->
+        <h6
+          class="h6-product"
+        >Rp {{ product.price ? rupiah(product.price) +"/"+product.satuan : 0 }}</h6>
         <span class="text-product">{{ product.description }}</span>
       </div>
       <div v-if="isFarmer" class="card-action flex-action">
         <span @click="trigger_edit_page(product._id)" class="btn grey border darken-2 small">
-          <i class="material-icons left">edit</i>EDIT
+          <i class="material-icons left">edit</i>SUNTING
         </span>
         <span @click="delete_product(product._id)" class="btn grey darken-2 small">
-          <i class="material-icons right">delete_forever</i>DELETE
+          <i class="material-icons right">delete_forever</i>HAPUS
         </span>
       </div>
     </div>

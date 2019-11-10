@@ -30,6 +30,9 @@
         <div v-if="isLoading">
           <Loading />
         </div>
+        <div v-if="isEmpty">
+          <EmptySpace />
+        </div>
       </div>
     </div>
   </div>
@@ -37,24 +40,28 @@
 
 <script>
 import Swal from "sweetalert2";
-import myServer from "../api/myServer.js";
 import MyProductCard from "../components/MyProductCard";
 import FormEditProduct from "../components/FormEditProduct";
+import myServer from "../api/myServer.js";
 import Loading from "../components/Loading";
+import EmptySpace from "../components/Empty";
+
 // import { truncate } from 'fs'
 
 export default {
   components: {
     MyProductCard,
     FormEditProduct,
-    Loading
+    Loading,
+    EmptySpace
   },
   data() {
     return {
       products: [],
       edit_mode: false,
       data_edit: "",
-      isLoading: true
+      isLoading: true,
+      isEmpty: false
     };
   },
   methods: {
@@ -92,8 +99,16 @@ export default {
       myServer
         .get("/product/all/" + localStorage.getItem("id"))
         .then(({ data }) => {
-          this.products = data;
-          this.isLoading = false;
+          console.log("ini producr", data);
+          if (data.length <= 0) {
+            this.isLoading = false;
+            this.isEmpty = true;
+            console.log("masuk empty");
+          } else {
+            console.log("masuk isi");
+            this.products = data;
+            this.isLoading = false;
+          }
         })
         .catch(err => {
           Swal.fire({

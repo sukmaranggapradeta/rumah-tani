@@ -44,6 +44,7 @@ export default {
           let beforeQuantity = 0;
           if (data !== null) {
             data.forEach(element => {
+              console.log("element", element);
               if (element.productId._id === payload.productId) {
                 isOnCart = true;
                 idCart = element._id;
@@ -71,6 +72,7 @@ export default {
                 // console.log(data)
               })
               .catch(err => {
+                console.log("err 3");
                 Swal.fire({
                   type: "error",
                   title: "Oops...",
@@ -94,6 +96,7 @@ export default {
               })
               .catch(err => {
                 // console.log(err)
+                console.log("err 4");
                 Swal.fire({
                   type: "error",
                   title: "Oops...",
@@ -104,6 +107,7 @@ export default {
         })
         .catch(err => {
           // console.log(err)
+          console.log("err 5");
           Swal.fire({
             type: "error",
             title: "Oops...",
@@ -112,6 +116,7 @@ export default {
         });
     },
     delete_cart(id) {
+      console.log("err 6");
       Swal.fire({
         title: "Are you sure?",
         text: "Remove this product from your cart!",
@@ -145,6 +150,7 @@ export default {
               });
             })
             .catch(err => {
+              console.log("err 7");
               Swal.fire({
                 type: "error",
                 title: "Oops...",
@@ -178,6 +184,7 @@ export default {
           });
         })
         .catch(err => {
+          console.log("err 1");
           Swal.fire({
             type: "error",
             title: "Oops...",
@@ -211,6 +218,7 @@ export default {
             });
           })
           .catch(err => {
+            console.log("err 2");
             Swal.fire({
               type: "error",
               title: "Oops...",
@@ -237,17 +245,17 @@ export default {
           });
         })
         .catch(err => {
-          if (err.response.status === 401) {
-            this.logout();
-            this.$router.push("/login");
-          } else {
-            // console.log(err.response)
-            Swal.fire({
-              type: "error",
-              title: "Oops...",
-              text: `${err.response.status}`
-            });
-          }
+          console.log("MASUK ERR", err.response);
+          // if (err) {
+          //   this.logout();
+          //   this.$router.push("/login");
+          // } else {
+          //   Swal.fire({
+          //     type: "error",
+          //     title: "Oops...",
+          //     text: `${err}`
+          //   });
+          // }
         });
     }
   },

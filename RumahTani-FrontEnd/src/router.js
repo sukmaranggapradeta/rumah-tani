@@ -43,6 +43,13 @@ export default new Router({
         import(/* webpackChunkName: "myproducts" */ "./views/MyProducts.vue")
     },
     {
+      path: "/carts",
+      name: "carts",
+      component: () =>
+        import(/* webpackChunkName: "myproducts" */ "./views/buyer/Cart.vue")
+    },
+
+    {
       path: "/dashboard",
       name: "dashboard",
       component: () =>
@@ -87,7 +94,7 @@ export default new Router({
             import(
               /* webpackChunkName: "dashboard-productList" */ "./components/ProductList.vue"
             )
-        },
+        }
       ]
     },
     {

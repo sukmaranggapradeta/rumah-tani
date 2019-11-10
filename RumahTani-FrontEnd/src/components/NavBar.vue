@@ -64,10 +64,10 @@
             </router-link>
           </li>
           <li v-if="isLogin">
-            <router-link class="sidenav-close" to="/profile">
-              <i class="material-icons">face</i>
-              {{ userName }}
-            </router-link>
+            <!-- <router-link class="sidenav-close" to="/profile"> -->
+            <i class="material-icons">face</i>
+            {{ userName }}
+            <!-- </router-link> -->
           </li>
           <li>
             <div class="divider"></div>
@@ -91,7 +91,7 @@
             </router-link>
           </li>
           <li v-if="isLogin && isCustomer">
-            <router-link class="sidenav-close" to="/mycarts">
+            <router-link class="sidenav-close" to="/carts">
               My Carts
               <i class="material-icons right">local_grocery_store</i>
               {{ countCart }}
@@ -187,10 +187,10 @@
               </router-link>
             </li>
             <li v-if="isLogin">
-              <router-link to="/profile">
-                <i class="material-icons right">face</i>
-                {{ userName }}
-              </router-link>
+              <!-- <router-link to="/profile"> -->
+              <i class="material-icons right">face</i>
+              {{ userName }}
+              <!-- </router-link> -->
             </li>
             <li v-if="isLogin">
               <router-link id="logout_link" to="/login" @click.native="logout()">

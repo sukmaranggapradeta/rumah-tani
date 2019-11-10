@@ -15,6 +15,7 @@
           :src="product.image ? `../../../server/public/products/${product.image}`  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT7kD200qOiwwDrwuDcHP_VFeXZBXmbgJfTQuzaINW_CK9z3L70'"
         />-->
         <!-- <h1 class="card-title">{{ product.name }}</h1> -->
+
         <span
           v-if="!isAdmin"
           @click="add_to_cart(product._id, product.name)"
@@ -24,9 +25,12 @@
         </span>
       </div>
       <div class="card-content">
+        <!-- {{ product}} -->
         <span class="h6-product">{{ product.name }}</span>
 
-        <h6 class="h6-product">IDR {{ product.price ? rupiah(product.price) +"/kg" : 0 }}</h6>
+        <h6
+          class="h6-product"
+        >Rp {{ product.price ? rupiah(product.price) +"/" + product.satuan : 0 }}</h6>
         <span class="text-product">{{ product.description }}</span>
       </div>
       <div class="card-action flex-action hide-on-med-and-up">
@@ -61,7 +65,11 @@ export default {
     //   this.$router.push(`/products/${id}`);
     // },
     add_to_cart(productId, productName) {
-      console.log("add_to_cart trigger", productId, productName);
+      console.log(
+        "add_to_cart trigger dr product card",
+        productId,
+        productName
+      );
       this.$emit("add_to_cart", { productId, productName });
     },
     delete_product(id) {

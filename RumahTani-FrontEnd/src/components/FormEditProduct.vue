@@ -43,8 +43,6 @@
                   />
                   <label class="active" for="product_price">Price</label>
                 </div>
-              </div>
-              <div class="left">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">S</i>
                   <input
@@ -54,6 +52,13 @@
                     class="validate"
                   />
                   <label class="active" for="product_stock">Stock</label>
+                </div>
+              </div>
+              <div class="left">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">S</i>
+                  <input v-model="product_type" id="product_type" type="text" class="validate" />
+                  <label for="product_type">Satuan</label>
                 </div>
               </div>
             </div>
@@ -130,6 +135,7 @@ export default {
       edit_product_name: this.data_edit.name,
       edit_product_description: this.data_edit.description,
       edit_product_price: this.data_edit.price,
+      edit_product_type: this.product_type,
       edit_product_stock: this.data_edit.stock,
       file: "",
       edit_urlTemp: this.data_edit.image,
@@ -211,6 +217,7 @@ export default {
           name: this.edit_product_name,
           description: this.edit_product_description,
           image: imageUrl,
+          satuan: this.edit_product_type,
           price: this.edit_product_price,
           stock: this.edit_product_stock
         })
@@ -228,7 +235,7 @@ export default {
           this.product_image = "";
           this.edit_product_price = "";
           this.edit_product_stock = "";
-          this.file = "";
+          (this.edit_product_type = ""), (this.file = "");
           this.edit_urlTemp = "";
           this.image_local = false;
           this.loading = false;
