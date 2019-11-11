@@ -2,19 +2,21 @@
   <div class="box-transaction container">
     <div class="row">
       <div class="col m8 l8 s12 border-box box-carts">
-        <div v-if="isEmpty">
+        <div v-if="isEmpty && !isPayment">
           <EmptyCart />
         </div>
-        <CardCart
-          v-for="cart in carts"
-          :key="cart.id"
-          :cart="cart"
-          @delete_selected_cart="delete_selected_cart"
-          @rupiah="rupiah"
-          @fecthDataCart="fecthDataCart"
-        />
+        <div v-if="!isPayment">
+          <CardCart
+            v-for="cart in carts"
+            :key="cart.id"
+            :cart="cart"
+            @delete_selected_cart="delete_selected_cart"
+            @rupiah="rupiah"
+            @fecthDataCart="fecthDataCart"
+          />
+        </div>
       </div>
-      <div class="col m4 l4 s12 border-box">
+      <div v-if="!isPayment" class="col m4 l4 s12 border-box">
         <div class="card">
           <div class="row">
             <div class="col m12 l12 s12">
@@ -27,11 +29,14 @@
               </div>
             </div>
             <div class="col m12 l12 s12 btn-beli">
-              <div class="col m12 l12 s12 btn tokped">Beli({{countCart}})</div>
+              <div @click="beliBtn" class="col m12 l12 s12 btn tokped">Beli({{countCart}})</div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div v-if="isPayment">
+      <PaymentForm />
     </div>
   </div>
 </template>
@@ -42,6 +47,7 @@ import Loading from "../../components/Loading";
 import CardCart from "../../components/CardCart.vue";
 import EmptyCart from "../../components/EmptyCart";
 import { mapState } from "vuex";
+import PaymentForm from "../../components/Payment";
 
 export default {
   computed: {
@@ -59,17 +65,24 @@ export default {
 
   components: {
     CardCart,
-    EmptyCart
+    EmptyCart,
+    PaymentForm
   },
   data() {
     return {
       carts: [],
       isLoading: true,
       isEmpty: false,
+      isPayment: false,
       totalPrice: 0
     };
   },
   methods: {
+    beliBtn() {
+      console.log("beli");
+      console.log(this.carts);
+      this.isPayment = true;
+    },
     rupiah(value) {
       // console.log("rupiah parent trigger", value);
       let newString = String(value);
@@ -88,6 +101,7 @@ export default {
     },
 
     fecthDataCart() {
+      console.log("masukfecthDataCart ");
       this.isLoading = true;
       this.totalPrice = 0;
       myServer

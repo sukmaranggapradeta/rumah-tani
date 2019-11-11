@@ -85,7 +85,7 @@ export default {
         console.log("delete quantity", cartId, quantity);
         myServer
           .put("/cart/" + cartId, {
-            quantity: quantity - 1
+            quantity: 2
           })
           .then(({ data }) => {
             console.log("ini update", data);

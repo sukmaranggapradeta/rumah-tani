@@ -72,11 +72,11 @@ export default {
                 // console.log(data)
               })
               .catch(err => {
-                console.log("err 3");
+                console.log("err 3", err);
                 Swal.fire({
                   type: "error",
                   title: "Oops...",
-                  text: `${err.response.data}`
+                  text: `${err.response}`
                 });
               });
           } else {

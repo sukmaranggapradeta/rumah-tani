@@ -1,36 +1,39 @@
-const mongoose = require('mongoose')
-const Product = require('./product')
+const mongoose = require("mongoose");
+const Product = require("./product");
 
-let cartSchema = new mongoose.Schema({
+let cartSchema = new mongoose.Schema(
+  {
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
     },
     productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product"
     },
-    quantity : {
-        type: Number
+    quantity: {
+      type: Number
     }
-},{ timestamps: true })
+  },
+  { timestamps: true }
+);
 
-cartSchema.pre('save', function(next) {
-    return Product.findOne({
-        _id: this.productId,
-        stock: { $lt: this.quantity }
-    }) 
-    .then(data => {
-        if(data) {
-            throw ({ code : 400, message: 'Item out of stock' })
-        }else {
-        next()
-        }
-    }).catch(err=> {
-        throw(err)
-    })
-})
+// cartSchema.pre('save', function(next) {
+//     return Product.findOne({
+//         _id: this.productId,
+//         stock: { $lt: this.quantity }
+//     })
+//     .then(data => {
+//         if(data) {
+//             throw ({ code : 400, message: 'Item out of stock' })
+//         }else {
+//         next()
+//         }
+//     }).catch(err=> {
+//         throw(err)
+//     })
+// })
 
-let Cart = mongoose.model('Cart', cartSchema)
+let Cart = mongoose.model("Cart", cartSchema);
 
-module.exports = Cart
+module.exports = Cart;
