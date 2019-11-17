@@ -78,7 +78,8 @@ route.delete("/cart/:id", ControllerCart.delete);
 
 route.post("/transaction/:userId", ControllerTransaction.create);
 route.get("/transaction/:id", ControllerTransaction.findOne);
-route.get("/transaction/all/:userId", ControllerTransaction.findAll);
+route.get("/transaction/all/customer/:userId", ControllerTransaction.findAll);
+route.get("/transaction/all/farmer/:userId", ControllerTransaction.findAllFarmer);
 route.put("/transaction/:id", ControllerTransaction.update);
 route.delete("/transaction/:id", ControllerTransaction.delete);
 

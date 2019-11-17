@@ -436,7 +436,32 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
 * sama kaya upload image pass add product
 
 # GET ALL TRANSACTION 
-### URL : '/transaction/all/:userId'
+### URL : '/transaction/all/customer/:userId'
+* METHOD : GET
+* RESPONSE STATUS : 200
+    ``` 
+    OUTPUT : [{
+        status : "success"
+        carts: [
+            userId: < ref_User_ObjectId >,
+            productId: < ref_Product_ObjectId >,
+        ]
+        receiverData: Object
+        paymentSlip: String
+        totalPrice : < ref_User_ObjectId >
+        userId : < ref_Product_ObjectId >
+        createdAt : "TIMESTAMPS"
+        updatedAt : "TIMESTAMPS"
+    }]
+    ```
+* RESPONSE STATUS : 500
+    ```
+    OUTPUT {
+        message : "internal server error"
+    }
+    ```
+# GET ALL TRANSACTION 
+### URL : '/transaction/all/farmer/:userId'
 * METHOD : GET
 * RESPONSE STATUS : 200
     ``` 
