@@ -2,7 +2,7 @@
   <div class="box-transaction container">
     <div class="row">
       <div class="col m8 l8 s12 border-box box-carts">
-        <div v-if="isEmpty && !isPayment">
+        <div v-if="isEmpty && !isPayment && !isLoading">
           <EmptyCart />
         </div>
         <div v-if="!isPayment">
@@ -16,7 +16,7 @@
           />
         </div>
       </div>
-      <div v-if="!isPayment" class="col m4 l4 s12 border-box">
+      <div v-if="!isPayment && !isLoading" class="col m4 l4 s12 border-box">
         <div class="card">
           <div class="row">
             <div class="col m12 l12 s12">
@@ -35,8 +35,11 @@
         </div>
       </div>
     </div>
-    <div v-if="isPayment">
-      <PaymentForm />
+    <div v-if="isLoading">
+      <Loading />
+    </div>
+    <div v-if="isPayment && !isLoading">
+      <PaymentForm :buyerCart="carts" :totalPrice="totalPrice" />
     </div>
   </div>
 </template>
@@ -48,6 +51,7 @@ import CardCart from "../../components/CardCart.vue";
 import EmptyCart from "../../components/EmptyCart";
 import { mapState } from "vuex";
 import PaymentForm from "../../components/Payment";
+import Swal from "sweetalert2";
 
 export default {
   computed: {
@@ -66,7 +70,8 @@ export default {
   components: {
     CardCart,
     EmptyCart,
-    PaymentForm
+    PaymentForm,
+    Loading
   },
   data() {
     return {

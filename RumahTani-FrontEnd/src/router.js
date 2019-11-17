@@ -46,9 +46,24 @@ export default new Router({
       path: "/carts",
       name: "carts",
       component: () =>
-        import(/* webpackChunkName: "myproducts" */ "./views/buyer/Cart.vue")
+        import(/* webpackChunkName: "carts" */ "./views/buyer/Cart.vue")
     },
-
+    {
+      path: "/mytransaction",
+      name: "mytransaction",
+      component: () =>
+        import(
+          /* webpackChunkName: "transactions" */ "./views/buyer/Transaction.vue"
+        )
+    },
+    {
+      path: "/myStore",
+      name: "myStore",
+      component: () =>
+        import(
+          /* webpackChunkName: "transactions" */ "./views/buyer/Transaction.vue"
+        )
+    },
     {
       path: "/dashboard",
       name: "dashboard",

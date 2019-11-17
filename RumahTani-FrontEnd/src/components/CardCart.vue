@@ -47,6 +47,7 @@
 
 <script>
 import myServer from "../api/myServer.js";
+import Swal from "sweetalert2";
 
 export default {
   props: ["cart"],
