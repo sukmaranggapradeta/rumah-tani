@@ -42,8 +42,9 @@ class ControllerTransaction {
       let userId = req.params.userId
       let newData = []
       let promise1 = Transaction.find().sort([['createdAt', -1]])
-      let promise2 = Product.find({userId})    
+      let promise2 = Product.find({userId})
       Promise.all([promise1,promise2])
+      
           .then(values => {
             values[0].forEach((transaction,iTransaction)=>{
               transaction.carts.forEach((cart,iCart)=> {
@@ -51,18 +52,20 @@ class ControllerTransaction {
                   if(cart.productId == product._id){
                       let obj = {}
                       obj.status = transaction.status
-                      obj.customer = cart.userId
-                      obj.totalPrice = Number(product.price) * Number(cart.quantity)
-                      obj.product = product.name
-                      obj.image = product.image || "no image"
-                      obj.receiverData = transaction.receiverData
-                      obj.paymentSlip = transaction.paymentSlip
+                      obj.pemesan = cart.userId
+                      obj.totalHarga = Number(product.price) * Number(cart.quantity)
+                      obj.barang = product.name
+                      obj.gambar = product.image || "no image"
+                      obj.dataPenerima = transaction.receiverData
+                      obj.buktiPembayaran = transaction.paymentSlip
+                      obj.totalPesananan = cart.quantity
+                      obj.deskripsiBarang = product.description
                       newData.push(obj)
                   }
                 })
               })
             })
-            res.status(200).json(values)
+            res.status(200).json(newData)
           })
           .catch(err => console.log(err))
     }
