@@ -7,17 +7,19 @@ let transactionSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: 'pending'
+        default: 'menunggu pembayaran'
     },
     totalPrice: {
         type: String
     },
     carts: [Object],
     receiverData: {
-        type: Object
+        type: Object,
+        default: {}
     },
     paymentSlip: {
-        type: String
+        type: String,
+        default: ''
     }
 },{ timestamps: true })
 

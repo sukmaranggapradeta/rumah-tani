@@ -402,7 +402,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
 * BODY : 
     ```
         {
-            status : 'success'
+            status : 'sudah di bayar'
             receiverData: Object -> (alamat, nama dsb.Di satuin)
             paymentSlip: String -> (ini url image pake routing di bawah ada routenya)
         }
@@ -410,7 +410,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
 * RESPONSE STATUS : 200
     ``` 
     OUTPUT : {
-        status : "success"
+        status : "sudah di bayar"
         carts: [
             userId: < ref_User_ObjectId >,
             productId: < ref_Product_ObjectId >,
