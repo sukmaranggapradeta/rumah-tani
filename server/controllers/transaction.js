@@ -55,12 +55,14 @@ class ControllerTransaction {
                       obj.totalPrice = Number(product.price) * Number(cart.quantity)
                       obj.product = product.name
                       obj.image = product.image || "no image"
+                      obj.receiverData = transaction.receiverData
+                      obj.paymentSlip = transaction.paymentSlip
                       newData.push(obj)
                   }
                 })
               })
             })
-            res.status(200).json(newData)
+            res.status(200).json(values)
           })
           .catch(err => console.log(err))
     }
