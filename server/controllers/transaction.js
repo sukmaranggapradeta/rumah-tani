@@ -101,6 +101,8 @@ class ControllerTransaction {
                 obj.deskripsiBarang = product.description;
                 obj.tanggalPemesanan = transaction.createdAt;
                 obj.noInvoice = transaction._id;
+                obj.hargaBarang = product.price
+                obj.satuan = product.satuan
                 newData.push(obj);
               }
             });
