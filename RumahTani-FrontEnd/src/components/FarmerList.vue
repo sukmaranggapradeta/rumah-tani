@@ -1,19 +1,20 @@
 <template>
     <div class="container">
         <div class="row">
-            <h3>Farmer</h3>
+            <h3>DAFTAR PETANI</h3>
+            <hr>
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Joined At</th>
-                        <th class="actionTh">Action</th>
+                        <th>Nama</th>
+                        <th>Alamat Email</th>
+                        <th>Tanggal Daftar</th>
+                        <th class="actionTh">Ubah || Hapus</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(farmer,index) in farmerList" :key="index">
-                        <td v-if="index !== indexEditUser"><span @click="handleAllProduct(farmer._id)">{{farmer.name}}</span></td>
+                        <td v-if="index !== indexEditUser"><span @click="handleAllProduct(farmer._id)" class="farmerName">{{farmer.name}}</span></td>
                         <td v-if="index === indexEditUser" class="editInput" >
                             <input v-model="newUser.name" placeholder="Placeholder" id="name" type="text" class="validate">
                         </td>
@@ -121,7 +122,13 @@ export default {
 }
 span:hover {
     cursor: pointer;
-    color:blue;
+    color: #0505b896;
     text-decoration-line: underline
+}
+h3 {
+    font-weight: bold;
+}
+.farmerName {
+    color: #0000ff96
 }
 </style>

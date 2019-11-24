@@ -342,6 +342,7 @@ backend for e-commerce farmer to customer for web based app U. Dahlan UPNVJ2019
             carts : [
                 {
                     userId : < ref_User_ObjectId >,
+                    username: String (nama user yang login)
                     productId : < ref_Product_ObjectId >,
                     quantity: Number
                 }

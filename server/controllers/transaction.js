@@ -44,23 +44,21 @@ class ControllerTransaction {
       })
       .catch(next);
   }
-  static findAllFarmer(req, res, next) {
-    console.log("masuk find all farmer1");
-    let userId = req.params.userId;
-    let newData = [];
-    let promise1 = Transaction.find().sort([["createdAt", -1]]);
-    let promise2 = Product.find({ userId });
-    Promise.all([promise1, promise2])
-
-      .then((values) => {
-        console.log("value", values);
-        values[0].forEach((transaction, iTransaction) => {
-          transaction.carts.forEach((cart, iCart) => {
-            values[1].forEach((product, iProduct) => {
+  static async findAllFarmer(req, res, next) {
+    var userId = req.params.userId;
+    var newData = [];
+    var promise1 = Transaction.find().sort([["createdAt", -1]]);
+    var promise2 = Product.find({ userId });
+    var finalResult = [];
+    await Promise.all([promise1, promise2])
+      .then(async (values) => {
+        await values[0].forEach(async (transaction, iTransaction) => {
+          await transaction.carts.forEach(async (cart, iCart) => {
+            await values[1].forEach(async (product, iProduct) => {
               if (cart.productId == product._id) {
-                let obj = {};
+                var obj = {};
                 obj.status = transaction.status;
-                obj.pemesan = cart.userId;
+                obj.namaPemesan = cart.username;
                 obj.totalHarga = Number(product.price) * Number(cart.quantity);
                 obj.barang = product.name;
                 obj.gambar = product.image || "no image";
@@ -68,6 +66,8 @@ class ControllerTransaction {
                 obj.buktiPembayaran = transaction.paymentSlip;
                 obj.totalPesananan = cart.quantity;
                 obj.deskripsiBarang = product.description;
+                obj.tanggalPemesanan = transaction.createdAt;
+                obj.noInvoice = transaction._id;
                 newData.push(obj);
               }
             });
@@ -75,35 +75,9 @@ class ControllerTransaction {
         });
         res.status(200).json(newData);
       })
-      .catch((err) => console.log(err));
+      .catch(next);
   }
-  // static findAllFarmer(req, res, next) {
-  //   console.log("masuk find all farmer2");
-  //   let userId = req.params.userId;
-  //   let newData = [];
-  //   let promise1 = Transaction.find().sort([["createdAt", -1]]);
-  //   let promise2 = Product.find({ userId });
-  //   Promise.all([promise1, promise2])
-  //     .then((values) => {
-  //       values[0].forEach((transaction, iTransaction) => {
-  //         transaction.carts.forEach((cart, iCart) => {
-  //           values[1].forEach((product, iProduct) => {
-  //             if (cart.productId == product._id) {
-  //               let obj = {};
-  //               obj.status = transaction.status;
-  //               obj.customer = cart.userId;
-  //               obj.totalPrice = Number(product.price) * Number(cart.quantity);
-  //               obj.product = product.name;
-  //               obj.image = product.image || "no image";
-  //               newData.push(obj);
-  //             }
-  //           });
-  //         });
-  //       });
-  //       res.status(200).json(newData);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
+
   static findOne(req, res, next) {
     Transaction.findOne({ _id: req.params.id })
       .then((data) => {

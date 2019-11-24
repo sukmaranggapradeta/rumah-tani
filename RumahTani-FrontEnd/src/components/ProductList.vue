@@ -4,11 +4,11 @@
             <table>
         <thead>
           <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Stcok</th>
-              <th>Review</th>
+              <th>Nama</th>
+              <th>Deskripsi</th>
+              <th>Harga</th>
+              <th>Stok</th>
+              <th>Gambar</th>
           </tr>
         </thead>
 
@@ -16,9 +16,9 @@
           <tr  v-for="(product,index) in products" :key="index">
             <td>{{product.name}}</td>
             <td>{{product.description}}</td>
-            <td>{{product.price}}</td>
+            <td>{{product.price}}/{{product.satuan}}</td>
             <td>{{product.stock}}</td>
-            <!-- <td><img :src="require(`../../../server/public/products/${product.image}`)"/></td>             -->
+            <td><img :src="require(`../../../server/public/products/${product.image}`)"/></td>            
           </tr>
         </tbody>
         <tbody v-else>
@@ -60,6 +60,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  img {
+    height: 100px;
+    width: 100px
+  }
 </style>
