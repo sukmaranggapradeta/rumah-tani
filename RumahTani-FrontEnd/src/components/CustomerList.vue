@@ -1,19 +1,20 @@
 <template>
     <div class="container">
         <div class="row">
-            <h3>Costumer</h3>
+            <h3>DAFTAR PEMBELI</h3>
+            <hr>
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Joined At</th>
-                        <th class="actionTh">Action</th>
+                        <th>Nama</th>
+                        <th>Alamat Email</th>
+                        <th>Tanggal Daftar</th>
+                        <th class="actionTh">Ubah || Hapus</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(customer,index) in customerList" :key="index">
-                        <td v-if="index !== indexEditUser"><span>{{customer.name}}</span></td>
+                        <td v-if="index !== indexEditUser" class="customerName"><span>{{customer.name}}</span></td>
                         <td v-if="index === indexEditUser" class="editInput" >
                             <input v-model="newUser.name" placeholder="Placeholder" id="name" type="text" class="validate">
                         </td>
@@ -115,5 +116,14 @@ span:hover {
     cursor: pointer;
     color:blue;
     text-decoration-line: underline
+}
+h3{
+    font-weight: bold
+}
+.customerName {
+    color: #0000ff96
+}
+.customerName:hover {
+    color: #0505b896
 }
 </style>

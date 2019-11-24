@@ -3,9 +3,8 @@
         <div class="row">
             <div class="col l2 #9e9e9e grey">
                 <div class="collection">
-                    <a @click="showFarmerList" class="collection-item" :class="{active: isFarmerActive}">Farmer</a>
-                    <a @click="showCostumerList" class="collection-item" :class="{active: isCustomerActive}">Costumers</a>
-                    <a href="#!" class="collection-item">Transactions</a>
+                    <a @click="showFarmerList" class="collection-item" :class="{active: isFarmerActive}">Petani</a>
+                    <a @click="showCostumerList" class="collection-item" :class="{active: isCustomerActive}">Pembeli</a>
                 </div>
             </div>
             <div class="col l10">
@@ -56,6 +55,9 @@ p {
     margin-bottom: 0
 }
 .l2 {
-height: 80vh;
+    height: 80vh;
+}
+a {
+    cursor: pointer;
 }
 </style>

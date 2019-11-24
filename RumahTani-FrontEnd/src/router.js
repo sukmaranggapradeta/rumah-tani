@@ -71,6 +71,14 @@ export default new Router({
         import(/* webpackChunkName: "dashboard" */ "./views/Dashboard.vue"),
       children: [
         {
+          path: "/",
+          name: "dashboard-home",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-home" */ "./components/LandingPage.vue"
+            )
+        },
+        {
           path: "customer",
           name: "dashboard-customer",
           component: () =>
