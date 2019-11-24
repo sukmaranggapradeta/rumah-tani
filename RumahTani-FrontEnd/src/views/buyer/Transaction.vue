@@ -59,20 +59,30 @@ export default {
     },
 
     fecthDataTransaction() {
+      console.log(
+        "masuk fetch data transaction",
+        localStorage.getItem("role"),
+        localStorage.getItem("id")
+      );
       this.isLoading = true;
       myServer
-        .get("/transaction/all/" + localStorage.getItem("id"))
+        .get(
+          `/transaction/all/${localStorage.getItem(
+            "role"
+          )}/${localStorage.getItem("id")}`
+        )
         .then(({ data }) => {
-          console.log(data, "ini data");
-          if (data.length <= 0) {
-            this.isEmpty = true;
-            this.isLoading = false;
-          } else {
+          console.log(data, "ini datanya ===============");
+          if (data.length > 0) {
             this.isLoading = false;
             this.transctions = data;
+          } else {
+            this.isEmpty = true;
+            this.isLoading = false;
           }
         })
         .catch(err => {
+          console.log("masuk error");
           Swal.fire({
             type: "error",
             title: "Oops...",

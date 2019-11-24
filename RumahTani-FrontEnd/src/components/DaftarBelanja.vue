@@ -9,13 +9,15 @@
       <div class="col s5 m5 l5">
         <div class="row">
           <div class="col s12 m12 l12 nama-toko flex-kiri">RumahTani</div>
-          <div class="col s12 m12 l12 flex-kiri">(INV/20191109/{{(transction._id).toUpperCase()}})</div>
+          <div
+            class="col s12 m12 l12 flex-kiri"
+          >(INV/{{new Date().getFullYear()}}/{{(transction._id).toUpperCase()}})</div>
         </div>
       </div>
       <div class="col s5 m5 l5">
         <div class="row border-left">
           <div class="col s12 m12 l12 flex-kiri">Status</div>
-          <div class="col s12 m12 l12 status-pesanan flex-kiri">Pesanan {{transction.status}}</div>
+          <div class="col s12 m12 l12 status-pesanan flex-kiri">{{transction.status}}</div>
         </div>
       </div>
       <div class="col s2 m2 l2">
@@ -33,14 +35,14 @@
           <div class="row margin-box">
             <div class="col s2 m2 l2 flex-center">
               <div class="row daftar-belanja-img">
-                <img :src="require(`../../../server/public/products/image-1573310663322.jpg`)" alt />
+                <img :src="require(`../../../server/public/products/${cart.products.image}`)" alt />
               </div>
             </div>
             <div class="col s9 m9 l9">
               <div class="row">
-                <div class="col s12 m12 l12 nama-toko flex-kiri">Nama Product</div>
+                <div class="col s12 m12 l12 nama-toko flex-kiri">{{cart.products.name}}</div>
                 <div class="col s12 m12 l12 flex-kiri warna-harga">
-                  Rp {{rupiah(transction.totalPrice)}}
+                  Rp {{rupiah(cart.products.price)}}
                   <span
                     class="warna-span"
                   >{{cart.quantity}} Produk</span>
@@ -54,12 +56,12 @@
             <div class="col s12 m12 l12 flex-kiri">Total Harga Produk</div>
             <div
               class="col s12 m12 l12 status-pesanan warna-harga font-harga-total flex-kiri"
-            >Rp {{rupiah(transction.totalPrice)}}</div>
+            >Rp {{rupiah(cart.quantity * cart.products.price)}}</div>
           </div>
         </div>
       </div>
     </div>
-    {{transction}}
+    <!-- {{transction}} -->
   </div>
 </template>
 
@@ -123,7 +125,7 @@ export default {
   border-left: 2px solid rgb(241, 241, 241);
 }
 .box-daftar-belanja {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .margin-box {
   margin: auto;
@@ -165,7 +167,7 @@ export default {
   padding-left: 10px;
 }
 .daftar-belanja-img img {
-  /* object-fit: contain; */
+  object-fit: cover;
   width: 56px;
   height: 56px;
   border-radius: 10px;
