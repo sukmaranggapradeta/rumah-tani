@@ -160,10 +160,18 @@ export default {
           })
           .then(({ data }) => {
             console.log("data dari upload", data, data.filename);
+            console.log("paymentSlip", data.filename);
             return myServer
               .post("/transaction/" + localStorage.getItem("id"), {
                 totalPrice: this.totalPrice,
-                carts: paymentCart
+                carts: paymentCart,
+                status: "Pesanan Diproses",
+                receiverData: {
+                  nama: this.nama,
+                  alamat: this.alamat,
+                  telp: this.telp
+                },
+                paymentSlip: data.filename
               })
               .then(({ data }) => {
                 Swal.fire({

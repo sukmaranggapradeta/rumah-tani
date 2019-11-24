@@ -61,7 +61,7 @@ export default new Router({
       name: "myStore",
       component: () =>
         import(
-          /* webpackChunkName: "transactions" */ "./views/buyer/Transaction.vue"
+          /* webpackChunkName: "transactions" */ "./views/farmer/MyStore.vue"
         )
     },
     {
