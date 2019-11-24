@@ -72,36 +72,11 @@ class ControllerTransaction {
               );
             });
           });
-        }
-      })
-      .catch(next);
-  }
-  static findAllFarmer(req, res, next) {
-    let userId = req.params.userId;
-    let newData = [];
-    let promise1 = Transaction.find().sort([["createdAt", -1]]);
-    let promise2 = Product.find({ userId });
-    Promise.all([promise1, promise2])
-      .then((values) => {
-        values[0].forEach((transaction, iTransaction) => {
-          transaction.carts.forEach((cart, iCart) => {
-            values[1].forEach((product, iProduct) => {
-              if (cart.productId == product._id) {
-                let obj = {};
-                obj.status = transaction.status;
-                obj.customer = cart.userId;
-                obj.totalPrice = Number(product.price) * Number(cart.quantity);
-                obj.product = product.name;
-                obj.image = product.image || "no image";
-                newData.push(obj);
-              }
-            });
-          });
-        });
-        res.status(200).json(newData);
-      })
-      .catch((err) => console.log(err));
-  }
+          res.status(200).json(newData)
+        })
+        .catch(next);
+      }
+  
   static findOne(req, res, next) {
     Transaction.findOne({ _id: req.params.id })
       .then((data) => {
