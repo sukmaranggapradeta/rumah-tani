@@ -29,7 +29,17 @@
               <div class="left">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">settings_phone</i>
-                  <input v-model="telp" ref="telp" id="product_price" type="text" class="validate" />
+                  <input
+                    v-model="telp"
+                    ref="telp"
+                    id="product_price"
+                    placeholder="081xxx"
+                    type="text"
+                    class="validate"
+                    min="9"
+                    max="15"
+                    onkeypress="validate(event)"
+                  />
                   <label for="product_price">No Hp</label>
                 </div>
               </div>
