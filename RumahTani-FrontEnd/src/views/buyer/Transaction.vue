@@ -1,6 +1,9 @@
 <template>
   <div class="box-transaction">
-    <div v-if="isEmpty">
+    <div v-if="isLoading">
+      <Loading />
+    </div>
+    <div v-if="isEmpty && !isLoading">
       <EmptyCart />
     </div>
     <DaftarBelanja
@@ -34,7 +37,7 @@ export default {
     ])
   },
 
-  components: { EmptyCart, DaftarBelanja },
+  components: { EmptyCart, DaftarBelanja, Loading },
   data() {
     return {
       transctions: [],
@@ -77,8 +80,11 @@ export default {
             this.isLoading = false;
             this.transctions = data;
           } else {
-            this.isEmpty = true;
-            this.isLoading = false;
+            setInterval(function showLoading() {
+              this.isEmpty = true;
+              this.isLoading = false;
+              clearInterval(showLoading);
+            }, 3000);
           }
         })
         .catch(err => {

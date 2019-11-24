@@ -44,8 +44,10 @@
             <div class="row">
               <div class="col s12 m12 l12 nama-toko flex-kiri">{{transction.barang}}</div>
               <div class="col s12 m12 l12 flex-kiri warna-harga">
-                Rp -
-                <span class="warna-span">{{transction.totalPesananan}} Produk</span>
+                Rp {{rupiah(transction.hargaBarang)}}
+                <span
+                  class="warna-span"
+                >{{transction.totalPesananan}} {{transction.satuan}}</span>
               </div>
             </div>
           </div>

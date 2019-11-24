@@ -1,6 +1,9 @@
 <template>
   <div class="box-transaction">
-    <div v-if="isEmpty">
+    <div v-if="isLoading">
+      <Loading />
+    </div>
+    <div v-if="isEmpty && !isLoading">
       <EmptyCart />
     </div>
     <DaftarBelanja
@@ -34,7 +37,7 @@ export default {
     ])
   },
 
-  components: { EmptyCart, DaftarBelanja },
+  components: { EmptyCart, DaftarBelanja, Loading },
   data() {
     return {
       transctions: [],

@@ -29,5 +29,10 @@
   .notfound {
     width: 90%;
   }
+  .box-empty img {
+    margin-top: -100px;
+    height: auto;
+    width: 100%;
+  }
 }
 </style>

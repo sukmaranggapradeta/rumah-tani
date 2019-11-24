@@ -6,7 +6,7 @@
       >{{formatTanggal(transction.createdAt)}}</div>
     </div>
     <div class="row border-bottom">
-      <div class="col s5 m5 l5">
+      <div class="col s12 m5 l5">
         <div class="row">
           <div class="col s12 m12 l12 nama-toko flex-kiri">RumahTani</div>
           <div
@@ -14,13 +14,13 @@
           >(INV/{{new Date().getFullYear()}}/{{(transction._id).toUpperCase()}})</div>
         </div>
       </div>
-      <div class="col s5 m5 l5">
+      <div class="col s6 m5 l5">
         <div class="row border-left">
           <div class="col s12 m12 l12 flex-kiri">Status</div>
           <div class="col s12 m12 l12 status-pesanan flex-kiri">{{transction.status}}</div>
         </div>
       </div>
-      <div class="col s2 m2 l2">
+      <div class="col s6 m2 l2">
         <div class="row border-left">
           <div class="col s12 m12 l12 flex-kiri">Total Belanja</div>
           <div
@@ -31,27 +31,32 @@
     </div>
     <div v-for="(cart, index) in transction.carts" :key="index">
       <div class="row border-bottom">
-        <div class="col s5 m5 l5">
+        <div class="col s8 m5 l5">
           <div class="row margin-box">
-            <div class="col s2 m2 l2 flex-center">
+            <div class="col s3 m2 l2 flex-center">
               <div class="row daftar-belanja-img">
-                <img :src="require(`../../../server/public/products/${cart.products.image}`)" alt />
+                <img
+                  :src="require(`../../../server/public/products/${cart && cart.products && cart.products.image}`)"
+                  alt
+                />
               </div>
             </div>
             <div class="col s9 m9 l9">
               <div class="row">
-                <div class="col s12 m12 l12 nama-toko flex-kiri">{{cart.products.name}}</div>
+                <div
+                  class="col s12 m12 l12 nama-toko flex-kiri"
+                >{{cart && cart.products && cart.products.name}}</div>
                 <div class="col s12 m12 l12 flex-kiri warna-harga">
-                  Rp {{rupiah(cart.products.price)}}
+                  Rp {{rupiah(cart && cart.products && cart.products.price)}}
                   <span
                     class="warna-span"
-                  >{{cart.quantity}} Produk</span>
+                  >{{cart && cart.quantity}} Produk</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col s7 m7 l7">
+        <div class="col s4 m7 l7">
           <div class="row border-left">
             <div class="col s12 m12 l12 flex-kiri">Total Harga Produk</div>
             <div

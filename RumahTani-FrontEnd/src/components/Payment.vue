@@ -176,7 +176,7 @@ export default {
               .post("/transaction/" + localStorage.getItem("id"), {
                 totalPrice: this.totalPrice,
                 carts: paymentCart,
-                status: "Pesanan Diproses",
+                status: "Pesanan Selesai",
                 receiverData: {
                   nama: this.nama,
                   alamat: this.alamat,
