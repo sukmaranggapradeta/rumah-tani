@@ -50,9 +50,13 @@
             </div>
           </div>
         </div>
-        <div class="flex-kiri link-show-image" @click="showBuktiTransfer()">
+        <div v-if="!buktiTransfer" class="flex-kiri link-show-image" @click="showBuktiTransfer()">
           Lihat Bukti Transfer
           <i class="material-icons">arrow_drop_down</i>
+        </div>
+        <div v-if="buktiTransfer" class="flex-kiri link-show-image" @click="hideBuktiTransfer()">
+          Sembuyikan Bukti Transfer
+          <i class="material-icons">arrow_drop_up</i>
         </div>
       </div>
       <div class="col s12 m7 l7">
@@ -88,6 +92,9 @@ export default {
   methods: {
     showBuktiTransfer() {
       this.buktiTransfer = true;
+    },
+    hideBuktiTransfer() {
+      this.buktiTransfer = false;
     },
     formatTanggal(value) {
       let tanggal = new Date(value).getDate();
