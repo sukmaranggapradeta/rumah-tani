@@ -38,7 +38,6 @@
                     class="validate"
                     min="9"
                     max="15"
-                    onkeypress="validate(event)"
                   />
                   <label for="product_price">No Hp</label>
                 </div>
@@ -148,18 +147,19 @@ export default {
           text: `Silahkan unggah bukti pembayaran`
         });
       } else {
-        console.log(this.totalPrice);
+        // console.log(this.totalPrice);
         // console.log(this.buyerCart);
         let paymentCart = [];
         this.buyerCart.forEach(element => {
           let objectCart = {
             userId: element.userId._id,
+            username: localStorage.getItem("name"),
             productId: element.productId._id,
             quantity: element.quantity
           };
           paymentCart.push(objectCart);
         });
-        console.log(paymentCart);
+        console.log("paymentCart1", paymentCart);
         let formData = new FormData();
         formData.append("image", this.file);
         myServer
@@ -171,6 +171,7 @@ export default {
           .then(({ data }) => {
             console.log("data dari upload", data, data.filename);
             console.log("paymentSlip", data.filename);
+            console.log("paymentCart2", paymentCart);
             return myServer
               .post("/transaction/" + localStorage.getItem("id"), {
                 totalPrice: this.totalPrice,
