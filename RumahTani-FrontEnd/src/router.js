@@ -23,7 +23,12 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "register" */ "./views/Register.vue")
     },
-
+    {
+      path: "/profile",
+      name: "profile",
+      component: () =>
+        import(/* webpackChunkName: "profile" */ "./views/Profile.vue")
+    },
     {
       path: "/addproduct",
       name: "addproduct",

@@ -4,7 +4,7 @@
       <Loading />
     </div>
     <div v-if="isEmpty && !isLoading">
-      <EmptyCart />
+      <EmptyProductFarmer />
     </div>
     <DaftarBelanja
       v-else
@@ -20,7 +20,7 @@ import myServer from "../../api/myServer.js";
 import Loading from "../../components/Loading";
 import { mapState } from "vuex";
 import Swal from "sweetalert2";
-import EmptyCart from "../../components/Empty";
+import EmptyProductFarmer from "../../components/EmptyProductFarmer";
 import DaftarBelanja from "../../components/DaftarPembeli";
 
 export default {
@@ -37,7 +37,7 @@ export default {
     ])
   },
 
-  components: { EmptyCart, DaftarBelanja, Loading },
+  components: { EmptyProductFarmer, DaftarBelanja, Loading },
   data() {
     return {
       transctions: [],

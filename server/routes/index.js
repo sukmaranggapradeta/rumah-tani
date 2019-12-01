@@ -55,13 +55,16 @@ route.get("/authenticate", authenticate, (req, res) => {
 route.post("/register", ControllerUser.create);
 route.post("/login", ControllerUser.login);
 route.get("/user/:role", ControllerUser.findAll);
-route.get("/user/:userId", ControllerUser.findOne);
+route.get("/user/profile/:userId", ControllerUser.findOne);
 route.put("/user/:userId", ControllerUser.update);
 route.delete("/user/:userId", ControllerUser.delete);
 route.post("/products/image/upload", upload.single("image"), function(req,res,next) {
   res.status(201).json(req.file);
 });
 route.post("/transaksi/image/upload", upload.single("image"), function(req,res,next) {
+  res.status(201).json(req.file);
+});
+route.post("/user/image/upload", upload.single("image"), function(req,res,next) {
   res.status(201).json(req.file);
 });
 route.post("/product/:userId", ControllerProduct.create);

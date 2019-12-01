@@ -129,13 +129,12 @@ export default {
               timer: 3500
             });
             this.$router.push("/login");
-            console.log("newUser adalah", newUser);
           })
           .catch(err => {
             Swal.fire({
               type: "error",
-              title: "Oops...",
-              text: `${err.response.data.err}`
+              title: "Terjadi kesalahan",
+              text: `email sudah di gunakan`
             });
           });
       } else {

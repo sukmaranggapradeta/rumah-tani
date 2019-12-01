@@ -20,7 +20,7 @@ import myServer from "../../api/myServer.js";
 import Loading from "../../components/Loading";
 import { mapState } from "vuex";
 import Swal from "sweetalert2";
-import EmptyCart from "../../components/Empty";
+import EmptyProductFarmer from "../../components/Empty";
 import DaftarBelanja from "../../components/DaftarBelanja";
 
 export default {
@@ -80,11 +80,11 @@ export default {
             this.isLoading = false;
             this.transctions = data;
           } else {
-            setInterval(function showLoading() {
-              this.isEmpty = true;
-              this.isLoading = false;
-              clearInterval(showLoading);
-            }, 3000);
+            this.isEmpty = true;
+            this.isLoading = false;
+            // setInterval(function showLoading() {
+            //   clearInterval(showLoading);
+            // }, 3000);
           }
         })
         .catch(err => {

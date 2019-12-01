@@ -54,20 +54,24 @@ class ControllerUser {
           .catch(next)
     }
     static findOne (req, res, next) {
+        console.log('mantap')
         User.findOne({_id: req.params.userId})
           .then(data => {
-              res.status(200).json(data)
+            res.status(200).json(data)
           })
           .catch(next)
     }
     static update (req, res, next) {
         let input = { ...req.body}
-        User.findOneAndUpdate({_id: req.params.userId}, input, {new: true})
+        User.findOne({_id: req.params.userId})
+          .then(user=> {
+              user.set(input)
+              return user.save()
+          })
           .then(data => {
               res.status(200).json(data)
           })
-          .catch(next)
-    }
+    }   
     static delete (req, res, next) {
         User.findOneAndDelete({ _id: req.params.userId })
          .then(() => {
