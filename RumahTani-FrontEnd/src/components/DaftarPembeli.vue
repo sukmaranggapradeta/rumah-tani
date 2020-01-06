@@ -34,20 +34,20 @@
     <!-- <div v-for="(cart, index) in transction.carts" :key="index"> -->
     <div class="row border-bottom">
       <div class="col s12 m5 l5">
-        <div class="row margin-box">
+        <div class="row margin-box" v-for="(produk,index) in transction.gambar" :key="index">
           <div class="col s6 m2 l2 flex-center">
             <div class="row daftar-belanja-img">
-              <img class :src="require(`../../../server/public/products/${transction.gambar}`)" alt />
+              <img class :src="require(`../../../server/public/products/${produk}`)" alt />
             </div>
           </div>
           <div class="col s6 m9 l9">
             <div class="row">
-              <div class="col s12 m12 l12 nama-toko flex-kiri">{{transction.barang}}</div>
+              <div class="col s12 m12 l12 nama-toko flex-kiri">{{transction && transction.barang[index]}}</div>
               <div class="col s12 m12 l12 flex-kiri warna-harga">
-                Rp {{rupiah(transction.hargaBarang)}}
+                Rp {{rupiah(transction.hargaBarang[index])}}
                 <span
                   class="warna-span"
-                >{{transction.totalPesananan}} {{transction.satuan}}</span>
+                >{{transction.totalPesananan[index]}} {{transction.satuan[index]}}</span>
               </div>
             </div>
           </div>
@@ -119,7 +119,6 @@ export default {
       return tanggal + " " + namaBulan[bulan] + " " + tahun;
     },
     rupiah(value) {
-      // console.log("rupiah parent trigger", value);
 
       let newString = String(value);
       let count = 0;
@@ -132,7 +131,6 @@ export default {
         ubah = newString[i] + ubah;
         count++;
       }
-      // console.log(ubah, "hasilnya");
       return ubah;
     }
   }
@@ -156,6 +154,7 @@ export default {
 
 .border-bottom {
   border-bottom: 1px solid rgb(241, 241, 241);
+  padding: 0.5rem
 }
 .border-left {
   border-left: 2px solid rgb(241, 241, 241);

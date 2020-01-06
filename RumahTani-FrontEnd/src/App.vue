@@ -34,17 +34,14 @@ export default {
   },
   methods: {
     add_to_cart(payload) {
-      console.log("dari APP", payload.productId, payload.productName);
       myServer
         .get(`/cart/all/${localStorage.getItem("id")}`)
         .then(({ data }) => {
-          console.log("data awal", data);
           let isOnCart = false;
           let idCart;
           let beforeQuantity = 0;
           if (data !== null) {
             data.forEach(element => {
-              console.log("element", element);
               if (element.productId._id === payload.productId) {
                 isOnCart = true;
                 idCart = element._id;
@@ -53,26 +50,14 @@ export default {
             });
           }
           if (isOnCart) {
-            console.log("masuk if cart sudah ada");
             myServer
               .put(`/cart/${idCart}`, {
                 quantity: beforeQuantity + 1
               })
               .then(({ data }) => {
-                console.log("data", data);
-                console.log("myCart", this.myCarts);
-                // let myCartsTemp = this.myCarts;
-                // myCartsTemp.map(el => {
-                //   if (el._id === data._id) {
-                //     this.total += el.product.price;
-                //     el.quantity = data.quantity;
-                //   }
-                // });
                 M.toast({ html: `${payload.productName} added to cart` });
-                // console.log(data)
               })
               .catch(err => {
-                console.log("err 3", err);
                 Swal.fire({
                   type: "error",
                   title: "Oops...",
@@ -80,7 +65,6 @@ export default {
                 });
               });
           } else {
-            console.log("masuk else cart blum ada");
             myServer
               .post("/cart", {
                 productId: payload.productId,
@@ -88,15 +72,11 @@ export default {
                 userId: localStorage.getItem("id")
               })
               .then(({ data }) => {
-                console.log(data, " baruuu");
                 this.$store.commit("plusCountCart");
                 this.myCarts.push(data);
-                // this.total += data.product.price;
                 M.toast({ html: `${payload.productName} added to cart` });
               })
               .catch(err => {
-                // console.log(err)
-                console.log("err 4");
                 Swal.fire({
                   type: "error",
                   title: "Oops...",
@@ -106,8 +86,6 @@ export default {
           }
         })
         .catch(err => {
-          // console.log(err)
-          console.log("err 5");
           Swal.fire({
             type: "error",
             title: "Oops...",
@@ -116,7 +94,6 @@ export default {
         });
     },
     delete_cart(id) {
-      console.log("err 6");
       Swal.fire({
         title: "Are you sure?",
         text: "Remove this product from your cart!",
@@ -150,7 +127,6 @@ export default {
               });
             })
             .catch(err => {
-              console.log("err 7");
               Swal.fire({
                 type: "error",
                 title: "Oops...",
@@ -161,7 +137,6 @@ export default {
       });
     },
     add_quantity(payload) {
-      // console.log('add quantity myCart', payload.id)
       myServer
         .put(
           `/carts/${payload.id}`,
@@ -184,7 +159,6 @@ export default {
           });
         })
         .catch(err => {
-          console.log("err 1");
           Swal.fire({
             type: "error",
             title: "Oops...",
@@ -218,7 +192,6 @@ export default {
             });
           })
           .catch(err => {
-            console.log("err 2");
             Swal.fire({
               type: "error",
               title: "Oops...",
@@ -237,36 +210,19 @@ export default {
         .then(({ data }) => {
           this.total = null;
           this.myCarts = data;
-          console.log(this.myCarts.length, "ini length cart");
-          console.log("data user cart", data);
           this.$store.commit("setupCountCart", this.myCarts.length);
           this.myCarts.forEach(el => {
             this.total += el.product.price * el.quantity;
           });
         })
         .catch(err => {
-          console.log("MASUK ERR", err.response);
-          // if (err) {
-          //   this.logout();
-          //   this.$router.push("/login");
-          // } else {
-          //   Swal.fire({
-          //     type: "error",
-          //     title: "Oops...",
-          //     text: `${err}`
-          //   });
-          // }
         });
     }
   },
   created() {
     if (localStorage.getItem("role")) {
-      this.$store.commit("userLogin");
-      // this.isLogin = true
-      // this.fetchDatas()
       this.fetchDataCarts();
     } else {
-      this.logout();
     }
   }
 };

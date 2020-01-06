@@ -62,11 +62,6 @@ export default {
     },
 
     fecthDataTransaction() {
-      console.log(
-        "masuk fetch data transaction",
-        localStorage.getItem("role"),
-        localStorage.getItem("id")
-      );
       this.isLoading = true;
       myServer
         .get(
@@ -75,7 +70,6 @@ export default {
           )}/${localStorage.getItem("id")}`
         )
         .then(({ data }) => {
-          console.log(data, "ini datanya ===============");
           if (data.length > 0) {
             this.isLoading = false;
             this.transctions = data;
@@ -85,7 +79,6 @@ export default {
           }
         })
         .catch(err => {
-          console.log("masuk error");
           Swal.fire({
             type: "error",
             title: "Oops...",

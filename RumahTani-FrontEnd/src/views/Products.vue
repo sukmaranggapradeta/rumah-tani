@@ -59,12 +59,10 @@ export default {
   },
   methods: {
     add_to_cart(payload) {
-      console.log("dari product view", payload);
       this.$emit("add_to_cart", payload);
     },
     update_data_after_edit(data) {
       this.products = this.products.map(el => {
-        // console.log(el)
         if (el._id === data._id) {
           el.name = data.name;
           el.description = data.description;
@@ -144,7 +142,6 @@ export default {
       });
     },
     update_product(id) {
-      // console.log('update_product')
       myServer
         .put(`/products/id`, {
           headers: {
@@ -170,9 +167,7 @@ export default {
     }
   },
   created() {
-    // console.log(localStorage.getItem("role"));
     if (localStorage.getItem("role") !== null) {
-      console.log("masuk nul");
       this.fetchDataProducts();
     } else {
       this.$router.push("/login");

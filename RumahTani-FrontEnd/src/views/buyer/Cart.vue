@@ -16,7 +16,7 @@
           />
         </div>
       </div>
-      <div v-if="!isPayment && !isLoading" class="col m4 l4 s12 border-box">
+      <div v-if="!isPayment && !isLoading && !isEmpty" class="col m4 l4 s12 border-box">
         <div class="card">
           <div class="row">
             <div class="col m12 l12 s12">
@@ -84,12 +84,9 @@ export default {
   },
   methods: {
     beliBtn() {
-      console.log("beli");
-      console.log(this.carts);
       this.isPayment = true;
     },
     rupiah(value) {
-      // console.log("rupiah parent trigger", value);
       let newString = String(value);
       let count = 0;
       let ubah = "";
@@ -101,12 +98,10 @@ export default {
         ubah = newString[i] + ubah;
         count++;
       }
-      // console.log(ubah, "hasilnya");
       return ubah;
     },
 
     fecthDataCart() {
-      console.log("masukfecthDataCart ");
       this.isLoading = true;
       this.totalPrice = 0;
       myServer
@@ -120,7 +115,6 @@ export default {
             this.isLoading = false;
             this.carts = data;
             data.forEach(element => {
-              console.log(element.productId.price, element.quantity);
               this.totalPrice += element.productId.price * element.quantity;
             });
           }
@@ -134,16 +128,13 @@ export default {
         });
     },
     delete_selected_cart(selectedCart) {
-      console.log("delete ini ", selectedCart);
       myServer
         .delete("/cart/" + selectedCart)
         .then(({ data }) => {
-          console.log("ini delete", data);
           this.fecthDataCart();
           this.$store.commit("minCountCart");
         })
         .catch(err => {
-          console.log("err delete carts");
           Swal.fire({
             type: "error",
             title: "Oops...",

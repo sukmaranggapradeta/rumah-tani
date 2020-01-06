@@ -105,12 +105,6 @@ export default {
   },
   methods: {
     register_button() {
-      console.log("register button di click");
-      console.log("namenya ", this.register_name);
-      console.log("emailnya ", this.register_email);
-      console.log("rolenya ", this.register_role);
-      console.log("passnya ", this.register_password);
-      console.log("pass2nya ", this.confirmpassword);
 
       if (this.register_password === this.confirmpassword) {
         myServer

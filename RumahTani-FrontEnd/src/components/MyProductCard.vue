@@ -38,24 +38,16 @@ export default {
     ...mapState(["isAdmin", "isCustomer", "isFarmer"])
   },
   methods: {
-    // show_detail(id) {
-    //   // console.log('show_detail', id)
-    //   this.$router.push(`/products/${id}`);
-    // },
     add_to_cart(productId, productName) {
-      console.log("add_to_cart trigger", productId, productName);
       this.$emit("add_to_cart", { productId, productName });
     },
     delete_product(id) {
-      console.log("delete_product", id);
       this.$emit("delete_product", id);
     },
     trigger_edit_page(id) {
-      console.log("trigger_edit_page dari card", id);
       this.$emit("trigger_edit_page", id);
     },
     rupiah(value) {
-      // console.log('rupiah trigger', value)
       let newString = String(value);
       let count = 0;
       let ubah = "";

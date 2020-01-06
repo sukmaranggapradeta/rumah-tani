@@ -66,12 +66,10 @@ export default {
   },
   methods: {
     add_to_cart(payload) {
-      console.log("dari product view", payload);
       this.$emit("add_to_cart", payload);
     },
     update_data_after_edit(data) {
       this.products = this.products.map(el => {
-        // console.log(el)
         if (el._id === data._id) {
           el.name = data.name;
           el.description = data.description;
@@ -87,7 +85,6 @@ export default {
       this.edit_mode = false;
     },
     trigger_edit_page(productId) {
-      console.log("trigger_edit_page dari view", productId);
       this.edit_mode = true;
       this.products.forEach(el => {
         if (el._id === productId) {
@@ -99,13 +96,10 @@ export default {
       myServer
         .get("/product/all/" + localStorage.getItem("id"))
         .then(({ data }) => {
-          console.log("ini producr", data);
           if (data.length <= 0) {
             this.isLoading = false;
             this.isEmpty = true;
-            console.log("masuk empty");
           } else {
-            console.log("masuk isi");
             this.products = data;
             this.isLoading = false;
           }
@@ -119,7 +113,6 @@ export default {
         });
     },
     delete_product(deletedId) {
-      console.log("delete_product dari parent", deletedId);
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -133,7 +126,6 @@ export default {
           myServer
             .delete(`/product/${deletedId}`)
             .then(deleted => {
-              console.log("deleted sukses", deleted);
               this.products = this.products.filter(el => {
                 if (el._id !== deletedId) {
                   return el;
@@ -158,7 +150,6 @@ export default {
       });
     },
     update_product(id) {
-      // console.log('update_product')
       myServer
         .put(`/products/id`, {
           headers: {
@@ -184,9 +175,7 @@ export default {
     }
   },
   created() {
-    // console.log(localStorage.getItem("role"));
     if (localStorage.getItem("role") !== null) {
-      console.log("masuk nul");
       this.fetchDataProducts();
     } else {
       this.$router.push("/login");

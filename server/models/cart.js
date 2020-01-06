@@ -18,21 +18,21 @@ let cartSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// cartSchema.pre('save', function(next) {
-//     return Product.findOne({
-//         _id: this.productId,
-//         stock: { $lt: this.quantity }
-//     })
-//     .then(data => {
-//         if(data) {
-//             throw ({ code : 400, message: 'Item out of stock' })
-//         }else {
-//         next()
-//         }
-//     }).catch(err=> {
-//         throw(err)
-//     })
-// })
+cartSchema.pre('save', function(next) {
+    return Product.findOne({
+        _id: this.productId,
+        stock: { $lt: this.quantity }
+    })
+    .then(data => {
+        if(data) {
+            throw ({ code : 400, message: 'Item out of stock' })
+        }else {
+          next()
+        }
+    }).catch(err=> {
+        throw(err)
+    })
+})
 
 let Cart = mongoose.model("Cart", cartSchema);
 

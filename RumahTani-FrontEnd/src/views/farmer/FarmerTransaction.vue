@@ -4,7 +4,7 @@
       <Loading />
     </div>
     <div v-if="isEmpty && !isLoading">
-      <EmptyCart />
+      <EmptyProductFarmer />
     </div>
     <DaftarBelanja
       v-else
@@ -20,8 +20,8 @@ import myServer from "../../api/myServer.js";
 import Loading from "../../components/Loading";
 import { mapState } from "vuex";
 import Swal from "sweetalert2";
-import EmptyProductFarmer from "../../components/Empty";
-import DaftarBelanja from "../../components/DaftarBelanja";
+import EmptyProductFarmer from "../../components/EmptyProductFarmer";
+import DaftarBelanja from "../../components/DaftarPembeli";
 
 export default {
   computed: {
@@ -65,9 +65,7 @@ export default {
       this.isLoading = true;
       myServer
         .get(
-          `/transaction/all/${localStorage.getItem(
-            "role"
-          )}/${localStorage.getItem("id")}`
+          `/transaction/all/farmer/${localStorage.getItem("farmerId")}`
         )
         .then(({ data }) => {
           if (data.length > 0) {
@@ -76,9 +74,6 @@ export default {
           } else {
             this.isEmpty = true;
             this.isLoading = false;
-            // setInterval(function showLoading() {
-            //   clearInterval(showLoading);
-            // }, 3000);
           }
         })
         .catch(err => {

@@ -130,11 +130,6 @@ export default {
   },
   methods: {
     add_product() {
-      console.log("this.product_name", this.product_name);
-      console.log("this.product_description", this.product_description);
-      console.log("this.product_price", this.product_price);
-      console.log("this.product_stock", this.product_stock);
-      console.log("userId", localStorage.getItem("id"));
       this.loading = true;
       this.form_add_page = false;
       if (this.product_name === "") {
@@ -187,7 +182,6 @@ export default {
             }
           })
           .then(({ data }) => {
-            console.log("data dari upload", data, data.filename);
             return myServer
               .post("/product/" + localStorage.getItem("id"), {
                 name: this.product_name,
@@ -215,6 +209,7 @@ export default {
                 this.product_stock = "";
                 this.file = "";
                 this.urlTemp = "";
+                this.$router.push('/myproducts')
               })
               .catch(err => {
                 Swal.fire({
@@ -229,11 +224,9 @@ export default {
       }
     },
     handleFileUpload() {
-      console.log("fotonya", this.$refs.file.files[0]);
       this.file = this.$refs.file.files[0];
       const file = this.$refs.file.files[0];
       this.urlTemp = URL.createObjectURL(file);
-      console.log(this.urlTemp);
     }
   }
 };

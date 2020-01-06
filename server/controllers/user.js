@@ -54,7 +54,6 @@ class ControllerUser {
           .catch(next)
     }
     static findOne (req, res, next) {
-        console.log('mantap')
         User.findOne({_id: req.params.userId})
           .then(data => {
             res.status(200).json(data)

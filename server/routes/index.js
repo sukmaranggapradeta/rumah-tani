@@ -82,9 +82,12 @@ route.delete("/cart/:id", ControllerCart.delete);
 route.post("/transaction/:userId", ControllerTransaction.create);
 route.get("/transaction/:id", ControllerTransaction.findOne);
 route.get("/transaction/all/customer/:userId", ControllerTransaction.findAll);
+route.get("/transactions", ControllerTransaction.findAllTransaction);
 route.get("/transaction/all/farmer/:userId", ControllerTransaction.findAllFarmer);
 route.put("/transaction/:id", ControllerTransaction.update);
 route.delete("/transaction/:id", ControllerTransaction.delete);
+route.get("/transactionOne/:id", ControllerTransaction.findAllTransactionOne);
+
 
 route.use("/*", (req, res) => res.status(404).json({ error: "Not Found :(" }));
 
