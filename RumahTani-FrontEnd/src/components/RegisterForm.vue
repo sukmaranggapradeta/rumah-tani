@@ -31,7 +31,7 @@
               <label for="register_email">Email</label>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col s6 m6 l6">
                 <p>
                   <label>
@@ -48,7 +48,7 @@
                   </label>
                 </p>
               </div>
-            </div>
+            </div>-->
 
             <div class="input-field">
               <i class="material-icons prefix">vpn_key</i>
@@ -98,7 +98,7 @@ export default {
     return {
       register_name: "",
       register_email: "",
-      register_role: "",
+      register_role: "customer",
       register_password: "",
       confirmpassword: ""
     };

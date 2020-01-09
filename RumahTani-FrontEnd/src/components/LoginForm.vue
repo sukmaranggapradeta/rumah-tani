@@ -70,7 +70,7 @@ export default {
           localStorage.setItem("role", user.data.role);
           this.$store.commit("userLogin");
           if (user.data.role === "farmer") {
-            this.$router.push("/myStore");
+            this.$router.push("/kebunku");
           } else if (user.data.role === "customer") {
             this.$router.push("/products");
           } else if (user.data.role === "admin") {

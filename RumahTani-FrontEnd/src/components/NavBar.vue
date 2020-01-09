@@ -73,12 +73,12 @@
             <div class="divider"></div>
           </li>
           <li v-if="isLogin && isFarmer">
-            <router-link class="sidenav-close" to="/addproduct">
-              Add Product
+            <router-link class="sidenav-close" to="/kebunku">
+              Kebunku
               <i class="material-icons right">add_a_photo</i>
             </router-link>
           </li>
-          <li v-if="isLogin && isFarmer">
+          <!-- <li v-if="isLogin && isFarmer">
             <router-link class="sidenav-close" to="/myproducts">
               My Products
               <i class="material-icons right">store</i>
@@ -89,7 +89,7 @@
               My Store
               <i class="material-icons right">monetization_on</i>
             </router-link>
-          </li>
+          </li>-->
           <li v-if="isLogin && isCustomer">
             <router-link class="sidenav-close" to="/carts">
               My Carts
@@ -126,23 +126,23 @@
         <div id="menunavbar" class>
           <ul class="right hide-on-med-and-down">
             <li v-if="isLogin && isFarmer">
-              <router-link class="sidenav-close" to="/addproduct">
-                Add Product
+              <router-link class="sidenav-close" to="/kebunku">
+                Kebunku
                 <i class="material-icons right">add_a_photo</i>
               </router-link>
             </li>
-            <li v-if="isLogin && isFarmer">
+            <!-- <li v-if="isLogin && isFarmer">
               <router-link class="sidenav-close" to="/myproducts">
                 My Products
                 <i class="material-icons right">store</i>
               </router-link>
-            </li>
-            <li v-if="isLogin && isFarmer">
+            </li>-->
+            <!-- <li v-if="isLogin && isFarmer">
               <router-link class="sidenav-close" to="/mystore">
                 My Store
                 <i class="material-icons right">monetization_on</i>
               </router-link>
-            </li>
+            </li>-->
             <li v-if="isLogin && isCustomer">
               <router-link class="sidenav-close" to="/products">
                 Products

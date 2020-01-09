@@ -31,6 +31,14 @@ export default new Router({
         import(/* webpackChunkName: "addproduct" */ "./views/AddProduct.vue")
     },
     {
+      path: "/kebunku",
+      name: "kebunku",
+      component: () =>
+        import(
+          /* webpackChunkName: "addproduct" */ "./views/farmer/Kebunku.vue"
+        )
+    },
+    {
       path: "/products",
       name: "products",
       component: () =>
