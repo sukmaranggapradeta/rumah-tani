@@ -26,17 +26,13 @@ class ControllerCart {
       .catch(next);
   }
   static update(req, res, next) {
-    console.log("masuk update", req.body, req.params.id);
     let input = { ...req.body };
     Cart.findOne({ _id: req.params.id })
       .then((cart) => {
-        console.log(input, "hasilnya ", cart);
         cart.set(input);
-        console.log("sebelum return");
         return cart.save();
       })
       .then((user) => {
-        console.log("then 2", user);
         res.status(200).json(user);
       })
       .catch(next);

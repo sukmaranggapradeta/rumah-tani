@@ -65,9 +65,7 @@ export default {
       this.isLoading = true;
       myServer
         .get(
-          `/transaction/all/${localStorage.getItem(
-            "role"
-          )}/${localStorage.getItem("id")}`
+          `/transaction/all/customer/${localStorage.getItem("customerId")}`
         )
         .then(({ data }) => {
           if (data.length > 0) {

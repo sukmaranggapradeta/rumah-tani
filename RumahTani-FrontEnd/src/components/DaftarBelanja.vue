@@ -95,7 +95,6 @@ export default {
       return tanggal + " " + namaBulan[bulan] + " " + tahun;
     },
     rupiah(value) {
-      // console.log("rupiah parent trigger", value);
 
       let newString = String(value);
       let count = 0;
@@ -108,7 +107,6 @@ export default {
         ubah = newString[i] + ubah;
         count++;
       }
-      // console.log(ubah, "hasilnya");
       return ubah;
     }
   }
@@ -125,6 +123,7 @@ export default {
 
 .border-bottom {
   border-bottom: 1px solid rgb(241, 241, 241);
+  padding: 0.5rem;
 }
 .border-left {
   border-left: 2px solid rgb(241, 241, 241);

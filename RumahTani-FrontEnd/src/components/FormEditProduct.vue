@@ -185,10 +185,8 @@ export default {
         this.data_edit.image === this.edit_urlTemp &&
         !this.image_local
       ) {
-        console.log("foto sama");
         this.update_product(this.urlTemp);
       } else {
-        console.log("foto beda");
         let formData = new FormData();
         formData.append("image", this.file);
         myServer
@@ -198,7 +196,6 @@ export default {
             }
           })
           .then(({ data }) => {
-            console.log(data.filename, "upload image datanya");
             this.update_product(data.filename);
             this.image_local = false;
           })
@@ -222,7 +219,6 @@ export default {
           stock: this.edit_product_stock
         })
         .then(({ data }) => {
-          console.log("selesai di update");
           Swal.fire({
             position: "center",
             type: "success",
@@ -256,11 +252,9 @@ export default {
       this.$emit("update_data_after_edit", data);
     },
     handleFileUpload() {
-      console.log("handleFileUpload masuk");
       this.file = this.$refs.file.files[0];
       const file = this.$refs.file.files[0];
       this.image_local = URL.createObjectURL(file);
-      console.log("selesai");
     }
   }
 };

@@ -39,6 +39,10 @@ let userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Password is required.'],
   },
+  image: {
+    type: String,
+    default: ''
+  },
   role: {
     type: String,
   },

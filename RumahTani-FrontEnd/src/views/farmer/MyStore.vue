@@ -4,7 +4,7 @@
       <Loading />
     </div>
     <div v-if="isEmpty && !isLoading">
-      <EmptyCart />
+      <EmptyProductFarmer />
     </div>
     <DaftarBelanja
       v-else
@@ -20,7 +20,7 @@ import myServer from "../../api/myServer.js";
 import Loading from "../../components/Loading";
 import { mapState } from "vuex";
 import Swal from "sweetalert2";
-import EmptyCart from "../../components/Empty";
+import EmptyProductFarmer from "../../components/EmptyProductFarmer";
 import DaftarBelanja from "../../components/DaftarPembeli";
 
 export default {
@@ -37,7 +37,7 @@ export default {
     ])
   },
 
-  components: { EmptyCart, DaftarBelanja, Loading },
+  components: { EmptyProductFarmer, DaftarBelanja, Loading },
   data() {
     return {
       transctions: [],
@@ -62,11 +62,6 @@ export default {
     },
 
     fecthDataTransaction() {
-      console.log(
-        "masuk fetch data transaction",
-        localStorage.getItem("role"),
-        localStorage.getItem("id")
-      );
       this.isLoading = true;
       myServer
         .get(
@@ -75,7 +70,6 @@ export default {
           )}/${localStorage.getItem("id")}`
         )
         .then(({ data }) => {
-          console.log(data, "ini datanya ===============");
           if (data.length > 0) {
             this.isLoading = false;
             this.transctions = data;
@@ -85,7 +79,6 @@ export default {
           }
         })
         .catch(err => {
-          console.log("masuk error");
           Swal.fire({
             type: "error",
             title: "Oops...",

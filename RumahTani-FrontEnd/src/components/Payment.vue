@@ -147,8 +147,6 @@ export default {
           text: `Silahkan unggah bukti pembayaran`
         });
       } else {
-        // console.log(this.totalPrice);
-        // console.log(this.buyerCart);
         let paymentCart = [];
         this.buyerCart.forEach(element => {
           let objectCart = {
@@ -159,7 +157,6 @@ export default {
           };
           paymentCart.push(objectCart);
         });
-        console.log("paymentCart1", paymentCart);
         let formData = new FormData();
         formData.append("image", this.file);
         myServer
@@ -169,9 +166,6 @@ export default {
             }
           })
           .then(({ data }) => {
-            console.log("data dari upload", data, data.filename);
-            console.log("paymentSlip", data.filename);
-            console.log("paymentCart2", paymentCart);
             return myServer
               .post("/transaction/" + localStorage.getItem("id"), {
                 totalPrice: this.totalPrice,
@@ -213,7 +207,6 @@ export default {
       }
     },
     rupiah(value) {
-      // console.log("rupiah parent trigger", value);
       let newString = String(value);
       let count = 0;
       let ubah = "";
@@ -225,15 +218,12 @@ export default {
         ubah = newString[i] + ubah;
         count++;
       }
-      // console.log(ubah, "hasilnya");
       return ubah;
     },
     handleFileUpload() {
-      console.log("fotonya", this.$refs.file.files[0]);
       this.file = this.$refs.file.files[0];
       const file = this.$refs.file.files[0];
       this.urlTemp = URL.createObjectURL(file);
-      console.log(this.urlTemp);
     },
 
     fecthDataPayment() {
@@ -249,7 +239,6 @@ export default {
       //         this.isLoading = false;
       //         this.carts = data;
       //         data.forEach(element => {
-      //           console.log(element.productId.price, element.quantity);
       //           this.totalPrice += element.productId.price * element.quantity;
       //         });
       //       }

@@ -23,7 +23,12 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "register" */ "./views/Register.vue")
     },
-
+    {
+      path: "/profile",
+      name: "profile",
+      component: () =>
+        import(/* webpackChunkName: "profile" */ "./views/Profile.vue")
+    },
     {
       path: "/addproduct",
       name: "addproduct",
@@ -94,6 +99,22 @@ export default new Router({
               /* webpackChunkName: "dashboard-customer" */ "./components/CustomerList.vue"
             )
         },
+        {
+          path: "farmerTransaction",
+          name: "dashboard-farmerTransaction",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-farmerTransaction" */ "./views/farmer/FarmerTransaction.vue"
+            )
+        },
+        {
+          path: "customerTransaction",
+          name: "dashboard-customerTransaction",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-customerTransaction" */ "./views/buyer/CustomerTransaction.vue"
+            )
+        },
         // {
         //   path: "producer",
         //   name: "dashboard-producer",
@@ -124,6 +145,22 @@ export default new Router({
           component: () =>
             import(
               /* webpackChunkName: "dashboard-productList" */ "./components/ProductList.vue"
+            )
+        },
+        {
+          path: "detailTransaction/:transactionId",
+          name: "dashboard-detailTransaction",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-detailTransaction" */ "./components/DetailTransaction.vue"
+            )
+        },
+        {
+          path: "transaction",
+          name: "dashboard-transactionList",
+          component: () =>
+            import(
+              /* webpackChunkName: "dashboard-transactionList" */ "./components/TransactionList.vue"
             )
         }
       ]

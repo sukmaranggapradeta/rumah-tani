@@ -64,10 +64,10 @@
             </router-link>
           </li>
           <li v-if="isLogin">
-            <router-link class="sidenav-close icon-profile" to="#">
+            <!-- <router-link class="sidenav-close icon-profile" to="#"> -->
               <i class="material-icons">face</i>
               {{ userName }}
-            </router-link>
+            <!-- </router-link> -->
           </li>
           <li>
             <div class="divider"></div>

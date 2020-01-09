@@ -58,21 +58,18 @@ export default {
   },
   methods: {
     add_quantity_cart(cartId, quantity) {
-      console.log("add quantity", cartId, quantity);
       myServer
         .put("/cart/" + cartId, {
           quantity: quantity + 1
         })
         .then(({ data }) => {
-          console.log("ini update", data);
           this.fecthDataCart();
         })
         .catch(err => {
-          console.log("err add quantity carts");
           Swal.fire({
             type: "error",
             title: "Oops...",
-            text: `${err.response.data}`
+            text: `${err.response.data.message}`
           });
         });
     },
@@ -83,17 +80,14 @@ export default {
       if (quantity <= 1) {
         this.delete_selected_cart(cartId);
       } else {
-        console.log("delete quantity", cartId, quantity);
         myServer
           .put("/cart/" + cartId, {
-            quantity: 2
+            quantity: quantity - 1
           })
           .then(({ data }) => {
-            console.log("ini update", data);
             this.fecthDataCart();
           })
           .catch(err => {
-            console.log("err add quantity carts");
             Swal.fire({
               type: "error",
               title: "Oops...",
@@ -103,7 +97,6 @@ export default {
       }
     },
     delete_selected_cart(selectedCart) {
-      // console.log("delete kok");
       this.$emit("delete_selected_cart", selectedCart);
     },
     rupiah(value) {
@@ -118,7 +111,6 @@ export default {
         ubah = newString[i] + ubah;
         count++;
       }
-      // console.log(ubah, "hasilnya");
       return ubah;
     }
   }
